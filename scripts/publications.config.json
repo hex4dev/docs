@@ -8,19 +8,11 @@
       "idTemplate": "diario-di-bordo-{date}"
     },
     {
-      "root": "documenti",
-      "match": "^documenti/(?<slug>[^/]+)\\.typ$",
-      "idTemplate": "documenti-{slug}"
-    },
-    {
-      "root": "documenti",
-      "match": "^documenti/(?<category>[^/]+)/(?<slug>[^/]+)\\.typ$",
-      "idTemplate": "documenti-{category}-{slug}"
-    },
-    {
-      "root": "documenti",
-      "match": "^documenti/(?<category>[^/]+)/(?<slug>[^/]+)/main\\.typ$",
-      "idTemplate": "documenti-{category}-{slug}"
+      "root": "verbali",
+      "match": "^verbali/esterni/(?<date>\\d{4}-\\d{2}-\\d{2})/verbale-esterno\\.typ$",
+      "category": "Verbali esterni",
+      "titleTemplate": "Verbale esterno — {dateIT}",
+      "idTemplate": "verbale-esterno-{date}"
     }
   ],
   "overrides": {}
