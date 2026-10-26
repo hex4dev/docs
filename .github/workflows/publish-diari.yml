@@ -1,0 +1,62 @@
+name: Publish diario di bordo
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    outputs:
+      entries: ${{ steps.discover.outputs.entries }}
+      has_entries: ${{ steps.discover.outputs.has_entries }}
+    steps:
+      - uses: actions/checkout@v6
+      - id: discover
+        name: Find diario di bordo files
+        shell: bash
+        run: |
+          entries='['
+          separator=''
+          for directory in diario-di-bordo/*/; do
+            [[ -d "$directory" ]] || continue
+            name=${directory%/}
+            name=${name##*/}
+            source="${directory}diario-di-bordo.typ"
+            [[ -f "$source" ]] || continue
+            entries+="${separator}{\"source\":\"${source}\",\"name\":\"${name}\"}"
+            separator=','
+          done
+          entries+=']'
+
+          printf 'entries=%s\n' "$entries" >> "$GITHUB_OUTPUT"
+          if [[ "$entries" == '[]' ]]; then
+            echo 'has_entries=false' >> "$GITHUB_OUTPUT"
+          else
+            echo 'has_entries=true' >> "$GITHUB_OUTPUT"
+          fi
+
+  publish:
+    needs: discover
+    if: needs.discover.outputs.has_entries == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        entry: ${{ fromJSON(needs.discover.outputs.entries) }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: typst-community/setup-typst@v5
+      - name: Compile diario di bordo
+        run: typst compile --root . "${{ matrix.entry.source }}" "diario-di-bordo-${{ matrix.entry.name }}.pdf"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: diario-di-bordo-${{ matrix.entry.name }}.pdf
+          path: diario-di-bordo-${{ matrix.entry.name }}.pdf
+          archive: false
+          if-no-files-found: error
