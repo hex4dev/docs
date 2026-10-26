@@ -1,0 +1,146 @@
+---
+import documents from '../data/generated-documents.json';
+import teamMembers from '../data/team-members.json';
+import { siteUrl, sourceUrl } from '../utils/urls.js';
+import '../styles/global.css';
+
+const categories = [...new Set(documents.map((document) => document.category))].sort((a, b) => a.localeCompare(b, 'it'));
+const dateLabel = (date) => date
+  ? new Intl.DateTimeFormat('it-IT', { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(`${date}T00:00:00.000Z`))
+  : 'Data non indicata';
+---
+
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Documentazione del gruppo 14 — hex4dev." />
+    <meta name="theme-color" content="#554AB6" />
+    <title>Documentazione | hex4dev</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="https://github.com/hex4dev" target="_blank" rel="noopener noreferrer" aria-label="Organizzazione GitHub hex4dev">
+          <img src={siteUrl('assets/hex4dev_logo.png')} alt="" width="80" height="80" />
+          <span>hex4dev</span>
+        </a>
+        <a class="repository-link" href="https://github.com/hex4dev/docs" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-heading" aria-labelledby="page-title">
+        <h1 id="page-title">Documentazione</h1>
+      </section>
+
+      <section class="team-panel" aria-labelledby="team-title">
+        <div class="team-panel-heading">
+          <h2 id="team-title">Il gruppo</h2>
+        </div>
+        <ul class="team-members">
+          {teamMembers.map((member) => (
+            <li>
+              <span class="member-name">{member.name}</span>
+              <a href={`https://github.com/${encodeURIComponent(member.github)}`} target="_blank" rel="noopener noreferrer" aria-label={`Profilo GitHub di ${member.name}`}>
+                @{member.github}
+              </a>
+              {member.status && <span class="member-status">{member.status}</span>}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="archive" aria-labelledby="archive-title">
+        <div class="archive-heading">
+          <h2 id="archive-title">Documenti</h2>
+          <span class="document-count" aria-live="polite"><span id="result-count">{documents.length}</span> {documents.length === 1 ? 'documento' : 'documenti'}</span>
+        </div>
+
+        <div class="controls">
+          <div class="search-field">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8" /><path d="m16 16 4 4" /></svg>
+            <label class="visually-hidden" for="document-search">Cerca per titolo, categoria o data</label>
+            <input id="document-search" type="search" placeholder="Cerca per titolo, categoria o data" autocomplete="off" />
+          </div>
+          <div class="filters" role="group" aria-label="Filtra per categoria">
+            <button class="filter-button is-active" type="button" data-category="all" aria-pressed="true">Tutti</button>
+            {categories.map((category) => (
+              <button class="filter-button" type="button" data-category={category} aria-pressed="false">{category}</button>
+            ))}
+          </div>
+        </div>
+
+        <div class="document-list" id="document-list">
+          {documents.map((document) => (
+            <article
+              class="document-row"
+              data-document
+              data-category={document.category}
+              data-search={`${document.title} ${document.category} ${document.type} ${document.date ?? ''} ${dateLabel(document.date)}`.toLocaleLowerCase('it-IT')}
+            >
+              <div class="document-main">
+                <h3>{document.title}</h3>
+                <p class="document-meta">
+                  <span>{document.category}</span>
+                  <span aria-hidden="true">·</span>
+                  <time datetime={document.date ?? undefined}>{dateLabel(document.date)}</time>
+                </p>
+              </div>
+              <div class="document-actions" aria-label={`Azioni per ${document.title}`}>
+                <a class="action-link action-primary" href={siteUrl(document.pdfPath)} target="_blank" rel="noopener noreferrer">Apri</a>
+                <a class="action-link" href={sourceUrl(document.sourcePath)} target="_blank" rel="noopener noreferrer" aria-label={`Sorgente Typst su GitHub: ${document.title}`}>Sorgente</a>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <p class="empty-state" id="empty-state" hidden>Nessun documento trovato.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <span>hex4dev · Gruppo 14</span>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<script>
+  import { matchesDocumentSearch } from '../utils/document-search.js';
+
+  const input = document.querySelector('#document-search');
+  const filterButtons = [...document.querySelectorAll('[data-category]')];
+  const cards = [...document.querySelectorAll('[data-document]')];
+  const count = document.querySelector('#result-count');
+  const emptyState = document.querySelector('#empty-state');
+  let activeCategory = 'all';
+
+  function filterDocuments() {
+    const query = input.value.trim().toLocaleLowerCase('it-IT');
+    let visibleCount = 0;
+    for (const card of cards) {
+      const visible = matchesDocumentSearch(card.dataset.search, card.dataset.category, query, activeCategory);
+      card.hidden = !visible;
+      if (visible) visibleCount += 1;
+    }
+    count.textContent = String(visibleCount);
+    emptyState.hidden = visibleCount !== 0;
+  }
+
+  input.addEventListener('input', filterDocuments);
+  for (const button of filterButtons) {
+    button.addEventListener('click', () => {
+      activeCategory = button.dataset.category;
+      for (const candidate of filterButtons) {
+        const selected = candidate === button;
+        candidate.classList.toggle('is-active', selected);
+        candidate.setAttribute('aria-pressed', String(selected));
+      }
+      filterDocuments();
+    });
+  }
+
+</script>

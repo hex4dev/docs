@@ -1,0 +1,17 @@
+{
+  "name": "hex4dev-documentation-site",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.22.0"
+  },
+  "scripts": {
+    "docs:build": "node ../scripts/build-documents.mjs",
+    "dev": "npm run docs:build && astro dev",
+    "build": "npm run docs:build && astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "7.4.0"
+  }
+}
