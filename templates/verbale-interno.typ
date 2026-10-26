@@ -52,7 +52,8 @@
 
 // Tabella con intestazione colorata (stile comune a decisioni e azioni)
 #let _tabella(colonne, intestazione, righe) = {
-  set text(size: 10pt)
+  set text(size: 10pt, hyphenate: false)
+  set par(justify: false)
   table(
     columns: colonne,
     stroke: 0.5pt + colore-primario.lighten(55%),
