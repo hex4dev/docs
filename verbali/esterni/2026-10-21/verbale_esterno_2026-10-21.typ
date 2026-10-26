@@ -1,10 +1,10 @@
-#import "verbale-template.typ": verbale
+#import "templates/verbale-esterno.typ": verbale
 
 #show: verbale.with(
-  titolo: "Verbale Incontro con Azienda Proponente",
+  titolo: "Verbale Incontro con Azienda Uranion",
   gruppo: "Hex4dev",
   data: "21/10/2026",
-  oggetto: "Incontro esplorativo",
+  oggetto: "Incontro esplorativo per il capitolato C3",
 )
 
 = Incontri
