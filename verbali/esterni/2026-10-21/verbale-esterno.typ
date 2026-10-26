@@ -1,4 +1,4 @@
-#import "templates/verbale-esterno.typ": verbale
+#import "/templates/verbale-esterno.typ": verbale
 
 #show: verbale.with(
   titolo: "Verbale Incontro con Azienda Uranion",
