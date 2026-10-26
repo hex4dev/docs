@@ -17,3 +17,18 @@ La compilazione avviene tramite:
 ```bash
 typst compile --root . diario-di-bordo/YYYY-MM-DD/diario-di-bordo.typ
 ```
+
+### Verbale esterno
+
+I verbali esterni seguono il seguente formato:
+
+```text
+verbali/esterni/YYYY-MM-DD/verbale-esterno.typ
+```
+
+La compilazione avviene tramite:
+
+```bash
+typst compile --root . verbali/esterni/YYYY-MM-DD/verbale-esterno.typ
+```
+
