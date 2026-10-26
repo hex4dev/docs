@@ -1,10 +1,19 @@
-# Documentazione
+# Documentazione hex4dev
 
-Documentazione di progetto per il gruppo 14 (hex4dev)
+Repository della documentazione del gruppo **hex4dev**.
 
-## Diario di bordo
+## Documenti
 
-Compilare dalla root del repository con
+### Diario di bordo
+
+I diari di bordo seguono il seguente formato:
+
+```text
+diario-di-bordo/YYYY-MM-DD/diario-di-bordo.typ
+```
+
+La compilazione avviene tramite:
+
 ```bash
-typst compile --root . diario-di-bordo/XXXX-YY-ZZ/diario-di-bordo.typ
+typst compile --root . diario-di-bordo/YYYY-MM-DD/diario-di-bordo.typ
 ```

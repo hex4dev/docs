@@ -1,0 +1,27 @@
+{
+  "rules": [
+    {
+      "root": "diario-di-bordo",
+      "match": "^diario-di-bordo/(?<date>\\d{4}-\\d{2}-\\d{2})/diario-di-bordo\\.typ$",
+      "category": "Diario di bordo",
+      "titleTemplate": "Diario di bordo — {dateIT}",
+      "idTemplate": "diario-di-bordo-{date}"
+    },
+    {
+      "root": "documenti",
+      "match": "^documenti/(?<slug>[^/]+)\\.typ$",
+      "idTemplate": "documenti-{slug}"
+    },
+    {
+      "root": "documenti",
+      "match": "^documenti/(?<category>[^/]+)/(?<slug>[^/]+)\\.typ$",
+      "idTemplate": "documenti-{category}-{slug}"
+    },
+    {
+      "root": "documenti",
+      "match": "^documenti/(?<category>[^/]+)/(?<slug>[^/]+)/main\\.typ$",
+      "idTemplate": "documenti-{category}-{slug}"
+    }
+  ],
+  "overrides": {}
+}
