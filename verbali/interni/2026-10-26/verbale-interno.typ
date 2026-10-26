@@ -1,199 +1,81 @@
-// ============================================================
-//  Template verbali interni hex4dev (riunioni del solo gruppo)
-//  Formato A4, palette condivisa con il template del diario.
-//
-//  Uso (dalla root del repository):
-//
-//    #import "/templates/verbale-interno.typ": *
-//
-//    #show: verbale-interno.with(
-//      numero: "VI-2026-10-26",
-//      data: "26/10/2026",
-//      ora-inizio: "15:00",
-//      ora-fine: "16:30",
-//      luogo: "Online (Discord)",
-//      verbalizzante: "Nome Cognome",
-//      presenti: ("Nome Cognome", "Nome Cognome"),
-//      assenti: ("Nome Cognome (giustificato)",),
-//    )
-//
-//    = Ordine del giorno
-//    + Primo punto
-//    + Secondo punto
-//
-//    = Resoconto
-//    == Primo punto
-//    Testo della discussione.
-//
-//    = Decisioni
-//    #decisioni(
-//      [Abbiamo deciso di ...],
-//    )
-//
-//    = Attività da svolgere
-//    #azioni(
-//      ([Descrizione], [Responsabile], [dd/mm/yyyy]),
-//    )
-//
-//  Compilazione:
-//    typst compile --root . verbali/.../verbale-interno.typ
-// ============================================================
+#import "/templates/verbale-interno.typ": *
 
-// La palette è la stessa del diario di bordo: si importa da lì
-// per non avere due fonti di verità.
-#import "/templates/diario-di-bordo.typ": (
-  colore-primario, colore-scuro, colore-accento, colore-testo, colore-sfondo, barretta,
+#show: verbale-interno.with(
+  numero: "VI-2026-10-26",
+  data: "26/10/2026",
+  ora-inizio: "15:00",
+  ora-fine: "15:55",
+  luogo: "Online (Discord)",
+  verbalizzante: "Francesco Bassani",
+  presenti: (
+    "Matteo Angelini",
+    "Francesco Bassani",
+    "Andrea Nogara",
+    "Matilde Pedrocchi",
+    "Alessandro Ravenna",
+    "Alessandro Zanier",
+  ),
+  assenti: ("nessuno",),
 )
 
-// --- Stato interno ------------------------------------------
-#let _numero-verbale = state("hex4dev-numero-verbale", none)
-#let _contatore-decisioni = counter("hex4dev-decisioni")
-#let _contatore-azioni = counter("hex4dev-azioni")
+= Ordine del giorno
++ Cadenza degli incontri interni
++ Documentazione: linguaggio, template e sito web
++ Way of working e contenuti della candidatura
++ Scelta del capitolato e capitolati alternativi
++ Valutazione dei capitolati e preventivo dei costi
++ Lettera di presentazione
++ Ripartizione dei compiti e prossimo incontro
 
-// Tabella con intestazione colorata (stile comune a decisioni e azioni)
-#let _tabella(colonne, intestazione, righe) = {
-  set text(size: 10pt)
-  table(
-    columns: colonne,
-    stroke: 0.5pt + colore-primario.lighten(55%),
-    inset: (x: 7pt, y: 6pt),
-    fill: (_, y) => if y == 0 { colore-primario } else if calc.even(y) { colore-sfondo } else { white },
-    table.header(..intestazione.map(t => text(fill: white, weight: "bold")[#t])),
-    ..righe,
-  )
-}
+= Resoconto
+== Cadenza degli incontri interni
+Dopo un breve riepilogo dell'incontro della mattina, il gruppo ha convenuto di fissare un incontro interno settimanale, da affiancare a incontri aggiuntivi quando necessario. Il giorno e l'orario scelti sono il lunedì alle 15:00 su Discord, senza obiezioni da parte dei presenti.
 
-// --- Elementi riusabili -------------------------------------
+== Documentazione, template e sito web
+Per avere un unico linguaggio in tutto il progetto, la documentazione sarà scritta interamente in Typst. È già disponibile un template per i verbali interni; un altro componente ne ha uno proprio e, una volta visionato, il gruppo sceglierà quello più adatto. Un sito web per presentare la documentazione è stato considerato utile ma non prioritario: Alessandro Zanier si è reso disponibile a realizzarlo su GitHub.
 
-// Elenco delle decisioni, con identificativi progressivi
-// (es. VI-2026-10-26-D1). Può essere chiamata più volte nello stesso
-// documento: la numerazione prosegue senza ripartire da D1.
-#let decisioni(..voci) = {
-  let voci = voci.pos()
-  context {
-    let numero = _numero-verbale.get()
-    let prefisso = if numero == none { "D" } else { numero + "-D" }
-    let inizio = _contatore-decisioni.get().first()
-    _tabella(
-      (auto, 1fr),
-      ("ID", "Decisione"),
-      voci.enumerate().map(((i, v)) => ([#prefisso#(inizio + i + 1)], v)).flatten(),
-    )
-  }
-  _contatore-decisioni.update(n => n + voci.len())
-}
+== Way of working e candidatura
+Si è osservato che gran parte del way of working potrà essere redatta solo dopo l'assegnazione del progetto; per ora si lavora a template e bozze. Nella lettera di presentazione sarà però opportuno accennare all'organizzazione, per esempio con un'idea di rotazione dei ruoli. Come principio generale il gruppo punta a una rotazione equa, in modo che le ore di ciascuno siano simili e tutti ricoprano tutti i ruoli.
 
-// Attività da svolgere. Ogni riga è una tupla (attività, responsabile, scadenza).
-#let azioni(..righe) = {
-  let righe = righe.pos()
-  context {
-    let numero = _numero-verbale.get()
-    let prefisso = if numero == none { "A" } else { numero + "-A" }
-    let inizio = _contatore-azioni.get().first()
-    _tabella(
-      (auto, 1fr, 3.4cm, 2.6cm),
-      ("ID", "Attività", "Responsabile", "Scadenza"),
-      righe.enumerate().map(((i, r)) => ([#prefisso#(inizio + i + 1)], ..r)).flatten(),
-    )
-  }
-  _contatore-azioni.update(n => n + righe.len())
-}
+Dal materiale del corso consultato durante la riunione sono emersi alcuni punti da tenere presenti. I verbali vanno ordinati in ordine cronologico inverso e con la data nel nome nel formato anno-mese-giorno, come già fatto. Ogni modifica deve avvenire su un proprio branch, con pull request su GitHub e verifica da parte di un incaricato prima del merge su main; resta da chiarire se farlo anche per la documentazione. Resta aperto anche il dubbio se ogni documento debba avere un proprio registro delle modifiche, distinto dai commit di Git: per i verbali sembra poco sensato, ma per glossario e analisi dei requisiti sì. Si cercheranno esempi di progetti degli anni passati per chiarire entrambi i punti.
 
-// --- Template principale ------------------------------------
-#let verbale-interno(
-  titolo: "Verbale della riunione interna",
-  gruppo: "Hex4dev",
-  numero: none, // identificativo del verbale, es. "VI-2026-10-26"
-  data: datetime.today().display("[day]/[month]/[year]"),
-  ora-inizio: none,
-  ora-fine: none,
-  luogo: "Online",
-  verbalizzante: none,
-  presenti: (),
-  assenti: (),
-  logo: "/assets/hex4dev_logo.png",
-  body,
-) = {
-  set document(title: titolo, author: gruppo)
-  set text(lang: "it", size: 11pt, fill: colore-testo,
-           font: ("Inter", "Noto Sans", "Liberation Sans", "DejaVu Sans"))
-  set par(justify: true, leading: 0.65em)
+La candidatura richiede la scelta del capitolato, il resoconto degli incontri con il proponente, le motivazioni della scelta con la valutazione di tutti i capitolati e il preventivo. La scadenza è venerdì 30/10/2026.
 
-  _numero-verbale.update(numero)
+== Scelta del capitolato e alternative
+Il capitolato C3 (FossDot) resta il candidato principale. Poiché finora è stato svolto un solo incontro con un proponente, si è deciso di chiedere un colloquio anche a un'altra azienda, così da dimostrare di non aver valutato un solo capitolato. È stato indicato come possibile riserva il C7 (dashboard di business intelligence collegata a una data factory, senza componenti hardware, con un'azienda descritta come molto reattiva).
 
-  set page(
-    paper: "a4",
-    margin: (x: 2.5cm, top: 3.2cm, bottom: 2.5cm),
-    header: {
-      set text(size: 9pt, fill: colore-scuro)
-      grid(
-        columns: (auto, 1fr),
-        align: horizon,
-        image(logo, height: 1cm),
-        align(right)[
-          #gruppo · Verbale interno
-          #if numero != none [ · #numero]
-        ],
-      )
-      v(-0.2em)
-      line(length: 100%, stroke: 1pt + colore-primario)
-    },
-    header-ascent: 30%,
-    footer: context {
-      set text(size: 9pt, fill: colore-scuro)
-      grid(
-        columns: (1fr, auto),
-        [#data],
-        [Pagina #counter(page).display() di #counter(page).final().first()],
-      )
-    },
-  )
+== Valutazione dei capitolati e preventivo
+La valutazione deve riguardare tutti i capitolati, con un'analisi per ciascuno e l'indicazione di quello selezionato; vale anche per quelli scartati. Il lavoro è diviso in due metà, capitolati da 0 a 4 e da 5 a 9, in una cartella dedicata su GitHub con un file già predisposto con tutte le sezioni, in modo da evitare conflitti. Si può partire da una sintesi preliminare dei PDF dei capitolati, da rielaborare e verificare prima di includerla. I due sottogruppi che si occupano di valutazione e preventivo si verificheranno a vicenda.
 
-  // Titoli: numerati, senza una pagina a sé
-  set heading(numbering: "1.1")
-  show heading.where(level: 1): it => block(above: 1.6em, below: 0.9em, breakable: false)[
-    #text(size: 15pt, weight: "bold", fill: colore-scuro)[#it]
-    #v(-0.5em)
-    #barretta(w: 1.6cm)
-  ]
-  show heading.where(level: 2): it => block(above: 1.2em, below: 0.6em,
-    text(size: 12pt, weight: "semibold", fill: colore-primario)[#it])
+Per il preventivo occorre dichiarare le ore per ruolo, con costi diversi per ciascun ruolo, entro i minimi e i massimi indicati dalle slide del corso, e una data di consegna prevista, di cui viene valutata la ragionevolezza. Orientativamente, dalle assegnazioni degli anni scorsi i gruppi da sei persone si collocano intorno ai 10-11 mila euro. Ci si procurerà la documentazione di un progetto passato per confrontare le ore.
 
-  // Elenchi
-  set list(marker: text(fill: colore-primario)[•], body-indent: 0.6em, spacing: 0.7em)
-  set enum(numbering: n => text(fill: colore-primario, weight: "bold")[#n.], body-indent: 0.6em, spacing: 0.7em)
+== Lettera di presentazione
+La lettera è indirizzata ai committenti e deve essere breve (circa due pagine): di fatto un assemblaggio dei due documenti principali, valutazione dei capitolati e preventivo, a cui rimanda. La struttura concordata comprende l'intestazione con la presentazione del gruppo, la motivazione della scelta del capitolato, ricavata dalla valutazione, e un'idea di costi e di data di consegna, con la timeline contenuta nel preventivo. Si potrà accennare all'organizzazione su GitHub. Una persona redigerà la bozza e il gruppo la completerà insieme nell'ultimo incontro prima della consegna.
 
-  show link: set text(fill: colore-primario)
-  show strong: set text(fill: colore-scuro)
+== Organizzazione del lavoro
+Il lavoro è stato suddiviso a coppie. Ciascuno lavora su un proprio branch e apre una pull request; i documenti saranno presentati e approvati insieme prima della consegna, così da metterlo a verbale. Alcuni componenti saranno parzialmente indisponibili tra il 28 e il 31/10: non serve che siano presenti tutti, è sufficiente che partecipino gli incaricati di ciascun documento, tenendosi in contatto con gli altri. Il verbalizzante pubblicherà su Discord un riepilogo dei compiti.
 
-  // ---- Titolo e riquadro informazioni ----
-  text(size: 24pt, weight: "bold", fill: colore-scuro)[#titolo]
-  v(-0.3em)
-  barretta(w: 3cm)
-  v(1em)
+= Decisioni
+#decisioni(
+  [Incontro interno settimanale fisso il lunedì alle 15:00 su Discord, con incontri aggiuntivi se necessario.],
+  [Tutta la documentazione sarà scritta in Typst.],
+  [Il capitolato C3 è il candidato principale; il C7 è un'eventuale riserva, da non approfondire per ora.],
+  [Richiedere un colloquio a un'altra azienda proponente, per documentare di aver valutato più capitolati.],
+  [Valutazione di tutti i capitolati suddivisa in due metà (0-4 e 5-9) in una cartella dedicata su GitHub, con verifica incrociata.],
+  [Il lavoro procede su branch separati con pull request e verifica prima del merge.],
+  [La lettera di presentazione avrà come struttura intestazione, motivazioni della scelta e idee di costi, e rimanderà a valutazione dei capitolati e preventivo.],
+)
 
-  let riga(etichetta, valore) = (
-    text(weight: "semibold", fill: colore-scuro)[#etichetta],
-    valore,
-  )
-  let elenco(persone) = if persone.len() == 0 [—] else { persone.join(", ") }
-  let orario = if ora-inizio != none and ora-fine != none [#ora-inizio – #ora-fine]
-    else if ora-inizio != none [dalle #ora-inizio]
+= Attività da svolgere
+#azioni(
+  ([Redigere il verbale della riunione e pubblicare su Discord il riepilogo dei compiti], [Francesco Bassani], [28/10/2026]),
+  ([Chiedere un colloquio a un'altra azienda proponente], [Matilde Pedrocchi], [30/10/2026]),
+  ([Valutazione dei capitolati da 0 a 4 (bozza)], [Alessandro Ravenna], [28/10/2026]),
+  ([Valutazione dei capitolati da 5 a 9 (bozza)], [Francesco Bassani], [28/10/2026]),
+  ([Preventivo dei costi per il capitolato C3 (bozza, con stima di ore e costi per ruolo)], [Alessandro Zanier, Andrea Nogara], [28/10/2026]),
+  ([Setup del sito web per la documentazione], [Alessandro Zanier], [Da definire]),
+  ([Lettera di presentazione: intestazione, motivazioni della scelta del capitolato, idee di costi], [Da assegnare], [30/10/2026]),
+)
 
-  let righe = (
-    ..riga("Data", data),
-    ..if orario != none { riga("Orario", orario) } else { () },
-    ..riga("Luogo", luogo),
-    ..if verbalizzante != none { riga("Verbalizzante", verbalizzante) } else { () },
-    ..riga("Presenti", elenco(presenti)),
-    ..riga("Assenti", elenco(assenti)),
-  )
-
-  block(width: 100%, fill: colore-sfondo, inset: 14pt, radius: 4pt,
-        stroke: (left: 3pt + colore-accento))[
-    #set par(justify: false)
-    #grid(columns: (3cm, 1fr), row-gutter: 0.7em, ..righe)
-  ]
-
-  body
-}
+= Prossima riunione
+Mercoledì 28/10/2026 alle 16:00, su Discord. Il successivo incontro fisso è lunedì 2/11/2026 alle 15:00. La candidatura va consegnata entro venerdì 30/10/2026.
