@@ -204,114 +204,134 @@ Tutti i capitolati, da C0 a C9, sono descritti con la stessa scheda, in modo da 
 Di seguito l'analisi dei dieci capitolati, da C0 a C9.
 
 
-== C0 – Titolo da definire
+== C0 – AIRA
 
 === Informazioni generali
-- *Titolo:* #todo[titolo del capitolato]
-- *Proponente:* #todo[azienda proponente]
-- *Referente:* #todo[nome del referente]
+- *Titolo:* AIRA: AI Requests Automation
+- *Proponente:* Sanmarco Informatica SPA
+- *Referente:* Linda Benozzato, Luca Marcon, Alberto Veronese
 
 === Breve descrizione
-#todo[Sintesi in poche righe, con parole del gruppo, del problema e della soluzione richiesta.]
+Strumento multimodale basato su intelligenza artificiale che automatizza la gestione delle richieste dei clienti in ambito B2B (ordini, ticket di assistenza, appuntamenti, documenti contabili), oggi disperse tra e-mail con allegati PDF, note vocali WhatsApp, messaggi informali e foto di etichette e cataloghi. Il sistema monitora i canali, trascrive l'audio con speech-to-text, legge immagini e documenti con OCR, interpreta il contenuto con un LLM e lo trasforma in dati strutturati secondo template per tipologia. Le azioni risultanti partono in automatico come chiamate API REST verso portali B2B, ERP, CRM o ticketing, oppure come e-mail. È richiesta un'interfaccia amministrativa web per configurare i canali, consultare i log e gestire la persistenza; sono opzionali una dashboard analitica e le risposte automatiche al mittente.
 
 === Aspetti positivi
-- #todo[Primo aspetto positivo.]
-- #todo[Secondo aspetto positivo.]
+- Obiettivi e funzionalità ben delimitati: requisiti obbligatori e opzionali distinti, uno scenario d'uso concreto (monitoraggio di una casella e-mail e creazione dell'ordine tramite API REST) e un'architettura di riferimento, con raccomandazioni esplicite su modularità, scalabilità e test.
+- Tema attuale e formativo: LLM, OCR e speech-to-text applicati a un problema aziendale reale, senza addestrare modelli, con orchestrazione tramite LangChain4j e integrazione con sistemi gestionali via API REST.
+- Tecnologie consigliate chiare e documentate, con risorse indicate per ogni area (Java con Spring Boot, Angular e TypeScript, SQLite, MariaDB o PostgreSQL, Whisper, Tesseract, EasyOCR), tutte note e diffuse.
+- Proponente strutturato e presente: tre referenti dedicati, metodologia Agile, supporto tecnico, assistenza nel setup degli ambienti e guida nella risoluzione delle criticità.
 
 === Criticità
-- #todo[Prima criticità o rischio.]
-- #todo[Seconda criticità o rischio.]
+- Ambito ampio: la pipeline deve gestire più canali (e-mail, WhatsApp, filesystem), trascrizione audio, OCR, interpretazione con LLM, filtro di sicurezza e integrazioni REST, oltre all'interfaccia amministrativa e ai test di unità e integrazione.
+- Le integrazioni con ERP, CRM e portali B2B non sono descritte nel dettaglio: servirebbero API di prova o simulatori, e il capitolato non indica con quali sistemi reali ci si dovrà interfacciare.
+- L'affidabilità dell'output degli LLM (ad esempio nella mappatura delle descrizioni sui codici articolo del catalogo) va gestita e verificata, e il filtro di ingresso deve garantire l'isolamento tra clienti per dati potenzialmente sensibili.
+- Non sono specificati costi e accesso ai servizi AI e cloud; il canale «meeting» compare nello schema dell'architettura ma non tra i requisiti, e andrebbe chiarito con il proponente, e l'integrazione con WhatsApp richiede attenzione.
 
 === Valutazione finale
-#todo[Giudizio complessivo sul capitolato (selezionato, riserva, scartato) e motivazione in poche righe.]
+Capitolato ben documentato e ricco di spunti tecnici, con un proponente strutturato e un buon supporto, ma con un ambito ampio e con incertezze sulle integrazioni da chiarire. #todo[Aggiungere l'esito: selezionato, riserva o scartato.]
 
 #pagebreak(weak: true)
-== C1 – Titolo da definire
+== C1 – AURA: AI for Understanding, Reasoning and Automation
 
 === Informazioni generali
-- *Titolo:* #todo[titolo del capitolato]
-- *Proponente:* #todo[azienda proponente]
-- *Referente:* #todo[nome del referente]
+- *Titolo:* AURA – AI for Understanding, Reasoning and Automation
+- *Proponente:* Vimar S.p.A.
+- *Referente:* Mariano Sciacco, Domenico Bevilacqua
 
 === Breve descrizione
-#todo[Sintesi in poche righe, con parole del gruppo, del problema e della soluzione richiesta.]
+Vimar produce impianti domotici wireless in rete Bluetooth Mesh ed è tra i promotori dell'interfaccia REST KNX IoT 3rd-party API, che permette di leggere e comandare un impianto di casa. Il capitolato chiede un dimostratore che unisce IoT e intelligenza artificiale generativa: un server MCP (Model Context Protocol) che espone queste API a servizi AI commerciali come Claude, ChatGPT, Copilot o Gemini, un client MCP e un'infrastruttura cloud-ready a container (Docker, Infrastructure as Code, compatibile con AWS). L'utente, autenticato con il proprio account MyVimar tramite OAuth2, controlla in linguaggio naturale luci, tapparelle, termostati e sensori; il capitolato elenca 17 casi d'uso base e 21 avanzati (richieste ambigue, comandi estesi con conferma, errori) e alcune funzioni nice-to-have. Vimar fornisce a ogni gruppo un kit fisico di impianto.
 
 === Aspetti positivi
-- #todo[Primo aspetto positivo.]
-- #todo[Secondo aspetto positivo.]
+- Kit fisico fornito a ogni gruppo (gateway, attuatori, comando tapparelle, sensori di presenza, termostato, pulsante allarme): si lavora su un impianto reale e il risultato è facilmente dimostrabile.
+- Requisiti molto dettagliati, con 38 casi d'uso di esempio e criteri di completamento distinti in obbligatori, opzionali e nice-to-have, oltre a deliverable chiari (architettura con modello C4, analisi tecnica, manuale di installazione, documentazione dei test).
+- Tema molto attuale (MCP, agenti AI) che usa servizi AI esistenti invece di addestrare modelli, con uno stack consigliato accessibile (Python con FastMCP) e sviluppo assistito da strumenti GenAI esplicitamente incoraggiato.
+- Supporto strutturato dal proponente: SAL bisettimanali, incontri di approfondimento tecnico e risorse AWS messe a disposizione se richieste.
 
 === Criticità
-- #todo[Prima criticità o rischio.]
-- #todo[Seconda criticità o rischio.]
+- Dipendenza da hardware e API del proponente: la documentazione KNX IoT è accessibile dopo registrazione e firma di un documento d'uso, e il kit è uno solo per gruppo, con il rischio di rallentamenti nello sviluppo e nei test.
+- Soglie di test impegnative: copertura minima del 75% su unità e integrazione e dell'80% sugli end-to-end (con estensione opzionale al 90%); i test sulle conversazioni sono resi difficili dal comportamento non deterministico degli LLM.
+- Competenze nuove da acquisire (KNX IoT, OAuth2, MCP, Docker e Infrastructure as Code) e vincolo di usare il meccanismo di Subscription invece del polling, con ricadute sull'architettura.
+- Tre componenti obbligatorie (infrastruttura, MCP server e client, agente AI) e un numero elevato di casi d'uso da gestire; costi di LLM e cloud non quantificati nel capitolato.
 
 === Valutazione finale
-#todo[Giudizio complessivo sul capitolato (selezionato, riserva, scartato) e motivazione in poche righe.]
+Capitolato concreto e ben strutturato, con hardware reale, requisiti dettagliati e un proponente molto presente, ma con un carico di test elevato e una forte dipendenza da kit e API di Vimar. #todo[Aggiungere l'esito: selezionato, riserva o scartato.]
 
 #pagebreak(weak: true)
-== C2 – Titolo da definire
+== C2 – NEXUM Concierge
 
 === Informazioni generali
-- *Titolo:* #todo[titolo del capitolato]
-- *Proponente:* #todo[azienda proponente]
-- *Referente:* #todo[nome del referente]
+- *Titolo:*  Concierge
+- *Proponente:* Eggon S.r.l. (Padova)
+- *Referente:* Gianpaolo Ferrarin
 
 === Breve descrizione
-#todo[Sintesi in poche righe, con parole del gruppo, del problema e della soluzione richiesta.]
+NEXUM è la piattaforma di Eggon per la comunicazione aziendale e i servizi HR, composta da un backoffice amministrativo e da una PWA per il personale. Il capitolato chiede di integrare nella PWA un assistente conversazionale (Concierge) con quattro capacità: rispondere su regolamenti e procedure caricati dal backoffice (RAG, con citazione delle fonti e astensione quando le informazioni non bastano), spiegare l'uso di NEXUM a partire dai manuali, consultare i dati personali su ferie e permessi tramite servizi autorizzati, preparare e registrare richieste con riepilogo e conferma esplicita dell'utente. L'MVP è limitato all'area ferie e permessi e può usare servizi NEXUM di prova o simulatori; il percorso prevede POC, realizzazione del percorso completo e verifica finale.
 
 === Aspetti positivi
-- #todo[Primo aspetto positivo.]
-- #todo[Secondo aspetto positivo.]
+- Perimetro dell'MVP molto circoscritto (solo ferie e permessi), con criteri di accettazione, rischi e mitigazioni già esplicitati e quattro capacità ben distinte che condividono chat, contesto e controlli.
+- Libertà nella scelta di stack, modelli e servizi, concordati con Eggon, con API documentate o simulatori conformi al contratto di integrazione forniti dal proponente.
+- Tema attuale e formativo: RAG, tool use, gestione del contesto del dialogo, astensione e valutazione separata di recupero, risposte ed esecuzione; effort di riferimento dichiarato (circa 3.360 ore, pari a 7 persone per 480 ore ciascuna).
+- Coordinamento chiaro: call settimanali o bisettimanali (con possibilità di incontri dal vivo), gruppo Telegram per le comunicazioni rapide, uso di strumenti come Claude Code o Codex incoraggiato e documentazione dei precedenti progetti con UNIPD disponibile.
 
 === Criticità
-- #todo[Prima criticità o rischio.]
-- #todo[Seconda criticità o rischio.]
+- Le soglie quantitative di prestazione non sono ancora definite e il documento è ancora in evoluzione (versione 9 del 13 ottobre 2026).
+- Dipendenza dal contratto di integrazione e dalle API o dai simulatori di Eggon, da concordare nella Fase 1; il significato dei dati e degli stati usati nei conteggi di ferie e permessi è demandato al proponente.
+- Valutare la qualità del recupero delle informazioni, delle citazioni e dell'astensione è difficile e richiede dati di prova e referenti per la validazione; il modello non deve inventare dati né sostituirsi ai servizi nei conteggi.
+- Molti requisiti trasversali (autorizzazioni, conferme, tracciabilità, elaborazioni asincrone, separazione tra aziende) pur in un dominio ristretto, con consumi e costi dei servizi AI da monitorare come parte della valutazione.
 
 === Valutazione finale
-#todo[Giudizio complessivo sul capitolato (selezionato, riserva, scartato) e motivazione in poche righe.]
+Capitolato molto chiaro su perimetro, accettazione e rischi, con libertà tecnologica su un tema attuale, ma con soglie di prestazione e integrazioni ancora da concordare e con la difficoltà di dimostrare la correttezza delle risposte. #todo[Aggiungere l'esito: selezionato, riserva o scartato.]
 
 #pagebreak(weak: true)
 == C3 – FossDot
 
 === Informazioni generali
-- *Titolo:* FossDot
+- *Titolo:* FossDot:  Smart Speaker Open Source, estensibile e rispettoso della privacy
 - *Proponente:* Uranion EMEA Ltd
 - *Referente:* Andrea Dorigo
 
 === Breve descrizione
-#todo[Sintesi in poche righe, con parole del gruppo, del problema e della soluzione richiesta.]
+Gli smart speaker commerciali sono dispositivi chiusi, legati al cloud del produttore e a un solo assistente, con poca trasparenza sui dati inviati ai server. Il capitolato chiede di realizzare FossDot, un ecosistema open source completo con quattro componenti: scelta dell'hardware (scheda, array di microfoni, altoparlante) con distinta base e prototipo; firmware embedded per wake word, streaming audio e riproduzione, con Rust preferenziale; servizio di bridging con pipeline STT, LLM e TTS, provider AI configurabili e client MCP; interfaccia web per registrare e configurare più dispositivi. L'MVP richiede il flusso «wake word, domanda, risposta vocale» su un dispositivo fisico, mentre la consegna completa aggiunge più provider AI, Skills e Agents, multi-dispositivo, aggiornamenti OTA e STT/TTS locale. Il progetto va rilasciato con licenza Apache 2.0 o MIT e resta di proprietà del gruppo.
 
 === Aspetti positivi
-- #todo[Primo aspetto positivo.]
-- #todo[Secondo aspetto positivo.]
+- Progetto open source con licenza permissiva e proprietà del gruppo: il lavoro può essere inserito nel curriculum e il gruppo può contribuire a un repository pubblico.
+- Prodotto tangibile e dimostrabile, su temi attuali (AI, MCP, privacy) e con tecnologie varie, tra cui Rust embedded, wake word, speech-to-text e text-to-speech.
+- Libertà tecnologica con riferimenti utili già indicati (openWakeWord, faster-whisper, Piper, Ollama, Axum) e obiettivi graduati: un MVP ben definito e una consegna completa a cui il gruppo può decidere se arrivare.
+- Supporto della proponente con sessioni tecniche e architetturali su richiesta, incontri di stato avanzamento e competenze di agentic coding messe a disposizione dei gruppi.
 
 === Criticità
-- #todo[Prima criticità o rischio.]
-- #todo[Seconda criticità o rischio.]
+- Ambito molto vasto (hardware, firmware, server, interfaccia web, MCP, multi-dispositivo): anche l'MVP è impegnativo e le stime di tempo sono difficili.
+- Competenze di embedded, audio e Rust poco comuni nel percorso di studi, con sviluppo, debug e testing su dispositivo fisico più onerosi; per il firmware la copertura di test va concordata caso per caso.
+- Il capitolato non indica che l'hardware sia fornito dalla proponente: scelta e costi dei componenti sembrano a carico del gruppo, e andrebbe chiarito.
+- Proponente a distanza (Londra e sede di Roma), con comunicazioni via chat, e-mail e videochiamate e incontri in presenza solo se necessari; i flussi vocali sono dati personali (GDPR) e servono costi per provider AI e servizi cloud, con copertura di riferimento di almeno l'80% sul software.
 
 === Valutazione finale
-#todo[Giudizio complessivo sul capitolato (selezionato, riserva, scartato) e motivazione in poche righe.]
+Capitolato ambizioso e vario dal punto di vista tecnico, con un forte valore di portfolio grazie alla licenza open source, ma con un ambito molto ampio e una componente hardware ed embedded difficile da stimare. #todo[Aggiungere l'esito: selezionato, riserva o scartato.]
 
 #pagebreak(weak: true)
-== C4 – Titolo da definire
+== C4 – Gestione veicoli e servizi post-vendita
 
 === Informazioni generali
-- *Titolo:* #todo[titolo del capitolato]
-- *Proponente:* #todo[azienda proponente]
-- *Referente:* #todo[nome del referente]
+- *Titolo:* Gestione Veicoli e Servizi Post-Vendita
+- *Proponente:* M31 S.r.l. (Padova)
+- *Referente:* Cristian Pirlog
 
 === Breve descrizione
-#todo[Sintesi in poche righe, con parole del gruppo, del problema e della soluzione richiesta.]
+Nel settore automotive le informazioni su modelli, veicoli venduti, manutenzioni e campagne di richiamo sono frammentate tra sistemi diversi. Il capitolato chiede una piattaforma distribuita, organizzata in servizi, che supporti tre soggetti: la casa automobilistica (catalogo modelli, veicoli, concessionarie, campagne di richiamo), le concessionarie (vendite, proprietari, richieste di manutenzione) e i proprietari dei veicoli (dati del veicolo, richiesta di appuntamenti, notifiche). Sono richiesti tre interfacce web distinte, API sicure e versionate, comunicazione sincrona e a eventi, autenticazione con ruoli e separazione dei dati tra organizzazioni. I dati dei veicoli possono essere inseriti a mano o simulati, senza integrare veicoli reali; il percorso prevede analisi dello stato dell'arte, PoC e MVP con un test book dettagliato.
 
 === Aspetti positivi
-- #todo[Primo aspetto positivo.]
-- #todo[Secondo aspetto positivo.]
+- Requisiti molto dettagliati, con distinzione chiara tra funzionalità minime e opzionali, deliverable per ogni fase (stato dell'arte, PoC, MVP) e un elenco preciso dei test da svolgere.
+- Nessun hardware né integrazione con veicoli reali: si lavora con dati simulati o inseriti manualmente, e il dominio è facile da comprendere.
+- Stack moderno e molto richiesto nel mondo del lavoro (microservizi, comunicazione a eventi con NATS o Kafka, Kubernetes, Angular, Nest.js) e occasione di fare esperienza con sicurezza, ruoli e separazione dei dati.
+- Azienda con sede a Padova, con un referente indicato nel documento e una forte attenzione dichiarata alla qualità del codice e ai test.
 
 === Criticità
-- #todo[Prima criticità o rischio.]
-- #todo[Seconda criticità o rischio.]
+- Complessità architetturale elevata: microservizi, event broker, Kubernetes su GCP, più database (PostgreSQL, MongoDB, Redis) e tre frontend Angular.
+- Stack molto ampio (TypeScript, Go, NATS o Kafka, Angular e altri strumenti) con molte tecnologie da apprendere; eventuali alternative vanno motivate e accettate da M31.
+- Rischio di sovradimensionamento: il dominio è in gran parte gestionale e il valore funzionale è basso rispetto all'effort richiesto per l'infrastruttura distribuita; poco spazio per l'intelligenza artificiale.
+- Molti test e documenti richiesti (test book, API, manuali, diagrammi C4), con copertura minima ancora da concordare; il documento non descrive le modalità di incontri e avanzamenti con il proponente.
 
 === Valutazione finale
-#todo[Giudizio complessivo sul capitolato (selezionato, riserva, scartato) e motivazione in poche righe.]
+Capitolato molto ben specificato e senza dipendenze da hardware, con punto di forza soprattutto architetturale, ma con una complessità infrastrutturale elevata rispetto al valore funzionale del dominio. #todo[Aggiungere l'esito: selezionato, riserva o scartato.]
 
 #pagebreak(weak: true)
 == C5 – RareCare
