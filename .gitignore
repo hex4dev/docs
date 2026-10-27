@@ -5,3 +5,4 @@ sito/.astro/
 sito/public/pdf/
 sito/public/assets/hex4dev_logo.png
 sito/src/data/generated-documents.json
+.DS_Store

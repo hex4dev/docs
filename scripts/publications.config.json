@@ -13,6 +13,13 @@
       "category": "Verbali esterni",
       "titleTemplate": "Verbale esterno — {dateIT}",
       "idTemplate": "verbale-esterno-{date}"
+    },
+    {
+      "root": "verbali",
+      "match": "^verbali/interni/(?<date>\\d{4}-\\d{2}-\\d{2})/verbale-interno\\.typ$",
+      "category": "Verbali interni",
+      "titleTemplate": "Verbale interno — {dateIT}",
+      "idTemplate": "verbale-interno-{date}"
     }
   ],
   "overrides": {}
