@@ -112,7 +112,7 @@ const dateLabel = (date) => date
   import { matchesDocumentSearch } from '../utils/document-search.js';
 
   const input = document.querySelector('#document-search');
-  const filterButtons = [...document.querySelectorAll('[data-category]')];
+  const filterButtons = [...document.querySelectorAll('.filters button[data-category]')];
   const cards = [...document.querySelectorAll('[data-document]')];
   const count = document.querySelector('#result-count');
   const emptyState = document.querySelector('#empty-state');
