@@ -1,49 +1,61 @@
-#import "/templates/verbale-esterno.typ": verbale
+#import "/templates/verbale-esterno.typ": *
 
-#show: verbale.with(
-  titolo: "Verbale Incontro con Azienda Uranion",
-  gruppo: "Hex4dev",
+#show: verbale-esterno.with(
+  numero: "VE-2026-10-21",
+  azienda: "Uranion",
   data: "21/10/2026",
-  oggetto: "Incontro esplorativo per il capitolato C3",
+  ora-inizio: "14:30",
+  ora-fine: "16:00",
+  luogo: "Online (Zoom)",
+  oggetto: "Incontro esplorativo",
+  verbalizzante: "Matilde Pedrocchi",
+  presenti-interni: ("Francesco Bassani", "Alessandro Ravenna", "Alessandro Zanier", "Matteo Angelini", "Matilde Pedrocchi"),
+  assenti-interni: ("Andrea Ravenna", ),
+  presenti-esterni: ("Giacomo Cariello",),
 )
 
-= Incontri
-Sono previsti incontri di allineamento bisettimanali per domande di consulto e chat di progetto su Mattermost.\
-Quando si avrà l'oggetto fisico a disposizione si potranno organizzare workshop in presenza in caso di necessità. La sede a Piove di Sacco non è ancora operativa, ma è possibile noleggiare una sala o farsi ospitare dall'Università di Padova. \
-Il supporto non è delineato in modo rigido ma definito a seconda dei bisogni.
+= Ordine del giorno
++ Modalità di incontro e supporto
++ Selezione dell'hardware
++ Gestione di dispositivi multipli e wake word
++ Priorità delle caratteristiche
++ Dashboard
++ Utilizzo di servizi esterni, LLM locali e sviluppo di skill
++ Aspetto estetico del prodotto
++ Interoperabilità
 
-= Hardware
-Il materiale hardware viene fornito dall'azienda, ma è a selezione del gruppo con una certa libertà, con la scelta stessa che è uno scopo del progetto. Una selezione più economica permette di poter acquistare materiale per più dispositivi. \
-È meglio scegliere del materiale con Linux/Android. \
-La selezione delle componenti hardware deve anche tenere conto della quantità e qualità della documentazione a disposizione sulle suddette parti.
+= Resoconto della discussione
 
-= Dispositivi multipli che ascoltano lo stesso comando
-Sarebbe carino trovare un metodo per evitare la competizione tra dispositivi multipli che ascoltano lo stesso comando. Questa però è una caratteristica desiderabile e non essenziale.
+== Incontri e Supporto
+Sono previsti incontri di allineamento bisettimanali per domande di consulto e chat di progetto su Mattermost. Quando si avrà l’oggetto fisico a disposizione si potranno organizzare workshop in presenza in caso di necessità. La sede a Piove di Sacco non è ancora operativa, ma è possibile noleggiare una sala o farsi ospitare
+dall’Università di Padova. 
 
-= Priorità delle caratteristiche
-Bisognerà dare diverse priorità ad ogni caratteristica che il progetto deve avere, valutando anche la complessità tecnica, decidendo caso per caso. È meglio avere poche funzionalità ma fatte bene che molte funzionalità abbozzate.
+Il supporto non è delineato in modo rigido ma definito a seconda dei
+bisogni
 
-= Richiesta di uso di servizi esterni
-Per la richiesta di servizi esterni come chiavi API, account dedicati o risorse cloud verranno messi a disposizione purché ragionevoli. Bisogna quindi valutare costo e aderenza al progetto.
+== Selezione dell'hardware
+Il materiale hardware viene fornito dall'azienda, con l'accortezza di rimanere entro un certo budget, ma la scelta è a carico del gruppo con una certa libertà, rappresentando essa stessa uno scopo del progetto. Una selezione più economica permette di acquistare materiale per più dispositivi. È preferibile orientarsi su hardware compatibile con Linux o Android. La quantità e qualità della documentazione disponibile sono un criterio da tenere a mente durante la selezione.
 
-= LLM locali
-L'uso di un LLM locale è una possibilità da valutare, che dipende da hardware e costi. È ad esempio possibile supportare Ollama. È meglio valutare prima casi semplici e comuni e poi eventualmente casi meno diffusi.
+== Dispositivi multipli e wake word
+Sarebbe utile trovare un metodo per evitare la competizione tra dispositivi multipli che ascoltano lo stesso comando, sebbene si tratti di una caratteristica desiderabile ma non essenziale. Il rilevamento della wake word deve invece avvenire obbligatoriamente in locale.
 
-= Skills
-Creare uno standard per dare la possibilità all'utente di creare skill personalizzate sarebbe bello da avere ma non è una delle priorità del progetto. Lo sviluppo è però incoraggiato.\
-Viene data piena libertà nella scelta delle skill da implementare in base al tempo disponibile, sempre nella prospettiva di fare un progetto funzionante e con un futuro oltre la data di consegna.
+== Priorità delle caratteristiche
+Occorre assegnare diverse priorità alle caratteristiche valutandone la complessità tecnica caso per caso. È preferibile avere poche funzionalità ma fatte bene piuttosto che molte abbozzate. 
 
-= Dashboard
-Non è necessaria un'app dedicata ma è ben accettata un'interfaccia responsive. Deve essere multiutente, multidispositivo e case diverse. Non è necessario fare onboarding di oggetti intelligenti come fa ad esempio Alexa.
+== Dashboard
+Non è necessaria un'app dedicata, ma è ben accettata un'interfaccia responsive, multiutente, multidispositivo e con gestione di case diverse. Non è necessario fare un onboarding complesso come fa ad esempio Alexa.
 
-= Wake word
-Il rilevamento della wake word va fatto necessariamente in locale.
+== Servizi esterni
+L'accesso a servizi esterni (Chiavi API, account dedicati, risorse cloud) verrà messo a disposizione purché ragionevole in termini di costi e aderenza al progetto. 
 
-= Aspetto
-È possibile scegliere anche l'estetica dell'oggetto. È possibile fare un disegno o usare CAD per poi far stampare il contenitore in 3D, ma non è il punto di partenza.
+== LLM locali
+L'uso di un LLM locale è una possibilità da valutare in base a hardware e costi (Ad esempio il supporto a Ollama), partendo prima da casi semplici e comuni. 
 
-= Interoperabilità
-Sarebbe utile fare in modo che più dispositivi FossDot possano comunicare tra di loro.
+== Skill
+La creazione di uno standard per skill personalizzate è incoraggiata ma non prioritaria, lasciando piena libertà in base al tempo disponibile per garantire un progetto funzionante.
 
-= Nome
-Il nome FossDot può essere cambiato.
+== Aspetto
+È possibile curare l'estetica del contenitore esterno dell'oggetto (Ad esempio facendo disegni o CAD per poi stamparlo in 3D), pur non rappresentando il punto di partenza del progetto.
+
+== Interoperabilità
+È utile abilitare la comunicazione tra più dispositivi FossDot.
