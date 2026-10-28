@@ -68,7 +68,7 @@ Capitolato ben documentato e ricco di spunti tecnici, con un proponente struttur
 == C1 – AURA: AI for Understanding, Reasoning and Automation
 
 === Informazioni generali
-- *Titolo:* AURA – AI for Understanding, Reasoning and Automation
+- *Titolo:* AURA: AI for Understanding, Reasoning and Automation
 - *Proponente:* Vimar S.p.A.
 - *Referente:* Mariano Sciacco, Domenico Bevilacqua
 
@@ -120,7 +120,7 @@ Capitolato molto chiaro su perimetro, accettazione e rischi, con libertà tecnol
 == C3 – FossDot
 
 === Informazioni generali
-- *Titolo:* FossDot:  Smart Speaker Open Source, estensibile e rispettoso della privacy
+- *Titolo:* FossDot:  Smart Speaker Open Source estensibile e rispettoso della privacy
 - *Proponente:* Uranion EMEA Ltd
 - *Referente:* Andrea Dorigo
 
@@ -172,7 +172,7 @@ Capitolato molto ben specificato e senza dipendenze da hardware, con punto di fo
 == C5 – RareCare
 
 === Informazioni generali
-- *Titolo:* RareCare – Piattaforma AI per la raccolta dati e il supporto decisionale nelle malattie rare
+- *Titolo:* RareCare: Piattaforma AI per la raccolta dati e il supporto decisionale nelle malattie rare
 - *Proponente:* Miriade S.r.l. (Thiene, VI)
 - *Referente:* Emanuele Righetto (coordinatore), Jessica Dalla Fontana (dominio clinico)
 
@@ -198,7 +198,7 @@ Capitolato di forte impatto sociale e con un supporto molto ampio da parte del p
 == C6 – Caching semantico e dashboard FinOps per LiteLLM
 
 === Informazioni generali
-- *Titolo:* Sviluppare un sistema IA di caching semantico e dashboard FinOps – Estendere le funzionalità del progetto open source LiteLLM
+- *Titolo:* Sistema AI di caching semantico e dashboard FinOps
 - *Proponente:* Var Group
 - *Referente:* Alessio Borgheresi, Stefano Dindo, Laura Ferretti, Michele Massaro
 
@@ -224,7 +224,7 @@ Capitolato tecnicamente interessante, ben delimitato e con un buon percorso di s
 == C7 – SmartDashboard
 
 === Informazioni generali
-- *Titolo:* SmartDashboard – Piattaforma di Business Intelligence self-service potenziata da AI
+- *Titolo:* SmartDashboard: Piattaforma di Business Intelligence potenziata da AI
 - *Proponente:* Ergon Informatica S.r.l. (Castelfranco Veneto, TV)
 - *Referente:* Gianluca Carlesso
 
@@ -250,7 +250,7 @@ Capitolato interamente software, di dominio comprensibile e con un buon equilibr
 == C8 – Sonar
 
 === Informazioni generali
-- *Titolo:* Sonar – Documentazione vivente di uno store Shopify
+- *Titolo:* Sonar: Documentazione vivente di uno store Shopify
 - *Proponente:* Halue S.r.l. Società Benefit (Parma e Abano Terme, PD)
 - *Referente:* Valentino Baraldo
 
@@ -276,7 +276,7 @@ Capitolato molto curato e con criteri di valutazione chiari, ma vincolato a uno 
 == C9 – SpecCheck
 
 === Informazioni generali
-- *Titolo:* SpecCheck – Skills per OpenCode per la verifica della tracciabilità end-to-end da casi d'uso a requisiti e codice sorgente
+- *Titolo:* SpecCheck: Skills per OpenCode per la verifica della tracciabilità tra casi d'uso , requisiti e codice sorgente
 - *Proponente:* Zucchetti S.p.A.
 - *Referente:* Gregorio Piccoli
 
