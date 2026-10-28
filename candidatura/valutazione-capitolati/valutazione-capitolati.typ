@@ -301,4 +301,4 @@ Capitolato innovativo e molto pertinente al corso, con un buon accesso ai modell
 = Capitolato selezionato
 
 == Valutazioni finali
-#todo[Valutazione finale comparativa dei capitolati e scelta del capitolato per la candidatura.]
+Il gruppo ha scelto il capitolato C3 – FossDot come prima scelta per la candidatura, [inserire qui il motivo principale]. Come seconda scelta ha individuato il C7 – SmartDashboard, interamente software, con un percorso incrementale chiaro e un proponente disponibile al confronto. Gli altri capitolati non sono stati selezionati per ambito troppo ampio, vincoli tecnologici o forte dipendenza da componenti esterni.
