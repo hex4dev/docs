@@ -105,6 +105,12 @@ main { padding-top: 40px; }
 .team-members a:hover { text-decoration: underline; }
 .member-status { margin-top: 2px; padding: 3px 8px; border-radius: 6px; color: var(--on-surface-muted); background: #f0eef9; font-size: 0.72rem; line-height: 1.35; }
 
+.section-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+.section-button { min-height: 40px; padding: 0 16px; border: 1px solid var(--outline); border-radius: 8px; color: var(--on-surface); background: var(--surface-container); font: inherit; font-weight: 600; cursor: pointer; }
+.section-button:hover { border-color: var(--primary); }
+.section-button.is-active { border-color: var(--primary); color: var(--on-primary); background: var(--primary); }
+
+
 .archive {
   overflow: hidden;
   border: 1px solid var(--outline);
@@ -122,7 +128,7 @@ main { padding-top: 40px; }
   padding: 0 24px;
 }
 
-.archive-heading h2 { margin: 0; font-size: 1.125rem; font-weight: 600; }
+.archive-heading h2 { margin: 3px 0 0; font-size: 1.125rem; font-weight: 600; }
 .document-count { color: var(--on-surface-muted); font-size: 0.875rem; }
 .document-count span { color: var(--on-surface); font-weight: 600; }
 
