@@ -62,7 +62,7 @@ Strumento multimodale basato su intelligenza artificiale che automatizza la gest
 - Non sono specificati costi e accesso ai servizi AI e cloud; il canale «meeting» compare nello schema dell'architettura ma non tra i requisiti, e andrebbe chiarito con il proponente, e l'integrazione con WhatsApp richiede attenzione.
 
 === Valutazione finale
-Capitolato ben documentato e ricco di spunti tecnici, con un proponente strutturato e un buon supporto, ma con un ambito ampio e con incertezze sulle integrazioni da chiarire. #todo[Aggiungere l'esito: selezionato, riserva o scartato.]
+Capitolato ben documentato e ricco di spunti tecnici, con un proponente strutturato e un buon supporto, ma con un ambito ampio e con incertezze sulle integrazioni da chiarire. Dopo una attenta valutazione il gruppo ha deciso di scartarlo.
 
 #pagebreak(weak: true)
 == C1 – AURA: AI for Understanding, Reasoning and Automation
@@ -88,7 +88,7 @@ Vimar produce impianti domotici wireless in rete Bluetooth Mesh ed è tra i prom
 - Tre componenti obbligatorie (infrastruttura, MCP server e client, agente AI) e un numero elevato di casi d'uso da gestire; costi di LLM e cloud non quantificati nel capitolato.
 
 === Valutazione finale
-Capitolato concreto e ben strutturato, con hardware reale, requisiti dettagliati e un proponente molto presente, ma con un carico di test elevato e una forte dipendenza da kit e API di Vimar. #todo[Aggiungere l'esito: selezionato, riserva o scartato.]
+Capitolato concreto e ben strutturato, con hardware reale, requisiti dettagliati e un proponente molto presente, ma con un carico di test elevato e una forte dipendenza da kit e API di Vimar. Per questo motivo il gruppo ha deciso di scartarlo.
 
 #pagebreak(weak: true)
 == C2 – NEXUM Concierge
@@ -114,7 +114,7 @@ NEXUM è la piattaforma di Eggon per la comunicazione aziendale e i servizi HR, 
 - Molti requisiti trasversali (autorizzazioni, conferme, tracciabilità, elaborazioni asincrone, separazione tra aziende) pur in un dominio ristretto, con consumi e costi dei servizi AI da monitorare come parte della valutazione.
 
 === Valutazione finale
-Capitolato molto chiaro su perimetro, accettazione e rischi, con libertà tecnologica su un tema attuale, ma con soglie di prestazione e integrazioni ancora da concordare e con la difficoltà di dimostrare la correttezza delle risposte. #todo[Aggiungere l'esito: selezionato, riserva o scartato.]
+Capitolato molto chiaro su perimetro, accettazione e rischi, con libertà tecnologica su un tema attuale, ma con soglie di prestazione e integrazioni ancora da concordare e con la difficoltà di dimostrare la correttezza delle risposte. Il gruppo ha deciso di scartare questo capitolto.
 
 #pagebreak(weak: true)
 == C3 – FossDot
@@ -140,7 +140,7 @@ Gli smart speaker commerciali sono dispositivi chiusi, legati al cloud del produ
 - Proponente a distanza (Londra e sede di Roma), con comunicazioni via chat, e-mail e videochiamate e incontri in presenza solo se necessari; i flussi vocali sono dati personali (GDPR) e servono costi per provider AI e servizi cloud, con copertura di riferimento di almeno l'80% sul software.
 
 === Valutazione finale
-Capitolato ambizioso e vario dal punto di vista tecnico, con un forte valore di portfolio grazie alla licenza open source, ma con un ambito molto ampio e una componente hardware ed embedded difficile da stimare. #todo[Aggiungere l'esito: selezionato, riserva o scartato.]
+Capitolato ambizioso e vario dal punto di vista tecnico, con un forte valore di portfolio grazie alla licenza open source, ma con un ambito molto ampio e una componente hardware ed embedded difficile da stimare. Il gruppo ha selezionato questo capitolato come prima scelta.
 
 #pagebreak(weak: true)
 == C4 – Gestione veicoli e servizi post-vendita
@@ -166,7 +166,7 @@ Nel settore automotive le informazioni su modelli, veicoli venduti, manutenzioni
 - Molti test e documenti richiesti (test book, API, manuali, diagrammi C4), con copertura minima ancora da concordare; il documento non descrive le modalità di incontri e avanzamenti con il proponente.
 
 === Valutazione finale
-Capitolato molto ben specificato e senza dipendenze da hardware, con punto di forza soprattutto architetturale, ma con una complessità infrastrutturale elevata rispetto al valore funzionale del dominio. #todo[Aggiungere l'esito: selezionato, riserva o scartato.]
+Capitolato molto ben specificato e senza dipendenze da hardware, con punto di forza soprattutto architetturale, ma con una complessità infrastrutturale elevata rispetto al valore funzionale del dominio. Il gruppo ha deciso di scartare questo capitolato.
 
 #pagebreak(weak: true)
 == C5 – RareCare
