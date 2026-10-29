@@ -1,25 +1,56 @@
 {
+  "defaultSection": "candidatura",
+  "sections": [
+    { "id": "candidatura", "title": "Candidatura" }
+  ],
   "rules": [
     {
-      "root": "diario-di-bordo",
-      "match": "^diario-di-bordo/(?<date>\\d{4}-\\d{2}-\\d{2})/diario-di-bordo\\.typ$",
+      "root": "candidatura",
+      "match": "^candidatura/diario-di-bordo/(?<date>\\d{4}-\\d{2}-\\d{2})/diario-di-bordo\\.typ$",
+      "section": "candidatura",
       "category": "Diario di bordo",
       "titleTemplate": "Diario di bordo — {dateIT}",
       "idTemplate": "diario-di-bordo-{date}"
     },
     {
-      "root": "verbali",
-      "match": "^verbali/esterni/(?<date>\\d{4}-\\d{2}-\\d{2})/verbale-esterno\\.typ$",
+      "root": "candidatura",
+      "match": "^candidatura/verbali/esterni/(?<date>\\d{4}-\\d{2}-\\d{2})/verbale-esterno\\.typ$",
+      "section": "candidatura",
       "category": "Verbali esterni",
       "titleTemplate": "Verbale esterno — {dateIT}",
       "idTemplate": "verbale-esterno-{date}"
     },
     {
-      "root": "verbali",
-      "match": "^verbali/interni/(?<date>\\d{4}-\\d{2}-\\d{2})/verbale-interno\\.typ$",
+      "root": "candidatura",
+      "match": "^candidatura/verbali/interni/(?<date>\\d{4}-\\d{2}-\\d{2})/verbale-interno\\.typ$",
+      "section": "candidatura",
       "category": "Verbali interni",
       "titleTemplate": "Verbale interno — {dateIT}",
       "idTemplate": "verbale-interno-{date}"
+    },
+    {
+      "root": "candidatura",
+      "match": "^candidatura/lettera-di-presentazione/lettera-di-presentazione\\.typ$",
+      "section": "candidatura",
+      "category": "Lettera di presentazione",
+      "title": "Lettera di presentazione",
+      "id": "lettera-di-presentazione"
+    },
+    {
+      "root": "candidatura",
+      "match": "^candidatura/valutazione-capitolati/valutazione-capitolati\\.typ$",
+      "section": "candidatura",
+      "category": "Valutazione capitolati",
+      "title": "Valutazione capitolati",
+      "id": "valutazione-capitolati"
+    },
+    {
+      "root": "dichiarazione-impegni",
+      "match": "^dichiarazione-impegni/dichiarazione-impegni\\.typ$",
+      "section": "candidatura",
+      "category": "Dichiarazione impegni",
+      "title": "Dichiarazione degli impegni",
+      "id": "dichiarazione-impegni"
     }
   ],
   "overrides": {}

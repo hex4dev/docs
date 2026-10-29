@@ -1,5 +1,6 @@
 ---
 import documents from '../data/generated-documents.json';
+import sectionConfig from '../data/generated-sections.json';
 import teamMembers from '../data/team-members.json';
 import { siteUrl, sourceUrl } from '../utils/urls.js';
 import '../styles/global.css';
@@ -52,6 +53,12 @@ const dateLabel = (date) => date
         </ul>
       </section>
 
+      <nav class="section-nav" aria-label="Sezioni" data-default-section={sectionConfig.defaultSection}>
+        {sectionConfig.sections.map((section) => (
+          <button class:list={['section-button', section.id === sectionConfig.defaultSection && 'is-active']} type="button" data-section={section.id} aria-pressed={section.id === sectionConfig.defaultSection ? 'true' : 'false'}>{section.title}</button>
+        ))}
+      </nav>
+
       <section class="archive" aria-labelledby="archive-title">
         <div class="archive-heading">
           <h2 id="archive-title">Documenti</h2>
@@ -77,6 +84,7 @@ const dateLabel = (date) => date
             <article
               class="document-row"
               data-document
+              data-section={document.section}
               data-category={document.category}
               data-search={`${document.title} ${document.category} ${document.type} ${document.date ?? ''} ${dateLabel(document.date)}`.toLocaleLowerCase('it-IT')}
             >
@@ -113,21 +121,35 @@ const dateLabel = (date) => date
 
   const input = document.querySelector('#document-search');
   const filterButtons = [...document.querySelectorAll('.filters button[data-category]')];
+  const sectionButtons = [...document.querySelectorAll('.section-nav button[data-section]')];
   const cards = [...document.querySelectorAll('[data-document]')];
   const count = document.querySelector('#result-count');
   const emptyState = document.querySelector('#empty-state');
   let activeCategory = 'all';
+  let activeSection = document.querySelector('.section-nav').dataset.defaultSection;
 
   function filterDocuments() {
     const query = input.value.trim().toLocaleLowerCase('it-IT');
     let visibleCount = 0;
     for (const card of cards) {
-      const visible = matchesDocumentSearch(card.dataset.search, card.dataset.category, query, activeCategory);
+      const visible = card.dataset.section === activeSection && matchesDocumentSearch(card.dataset.search, card.dataset.category, query, activeCategory);
       card.hidden = !visible;
       if (visible) visibleCount += 1;
     }
     count.textContent = String(visibleCount);
     emptyState.hidden = visibleCount !== 0;
+  }
+
+  for (const button of sectionButtons) {
+    button.addEventListener('click', () => {
+      activeSection = button.dataset.section;
+      for (const candidate of sectionButtons) {
+        const selected = candidate === button;
+        candidate.classList.toggle('is-active', selected);
+        candidate.setAttribute('aria-pressed', String(selected));
+      }
+      filterDocuments();
+    });
   }
 
   input.addEventListener('input', filterDocuments);
