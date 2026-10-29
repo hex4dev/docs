@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const pdfDirectory = path.join(root, 'sito/public/pdf');
 const catalogFile = path.join(root, 'sito/src/data/generated-documents.json');
+const sectionsFile = path.join(root, 'sito/src/data/generated-sections.json');
 const logoFile = path.join(root, 'sito/public/assets/hex4dev_logo.png');
 const compare = (a, b) => a < b ? -1 : a > b ? 1 : 0;
 const titleCase = (text) => text.replace(/[-_]+/g, ' ').replace(/\b\p{L}/gu, (letter) => letter.toLocaleUpperCase('it-IT'));
@@ -44,6 +45,7 @@ function metadata(sourcePath, rule, captures, override = {}) {
     throw new Error(`Percorso PDF non valido: ${pdfPath}`);
   }
   return {
+    section: override.section ?? rule.section,
     id: slugify(field('id', sourcePath.replace(/\.typ$/, ''))),
     title: override.title ?? field('title', titleCase(captures.slug ?? path.posix.basename(sourcePath, '.typ'))),
     category, type: override.type ?? field('type', slugify(category)), date, sourcePath, pdfPath,
@@ -85,10 +87,19 @@ function discover(config) {
 function clean() {
   rmSync(pdfDirectory, { recursive: true, force: true });
   rmSync(catalogFile, { force: true });
+  rmSync(sectionsFile, { force: true });
 }
 
 function build() {
   const config = JSON.parse(readFileSync(path.join(root, 'scripts/publications.config.json'), 'utf8'));
+  if (!Array.isArray(config.sections) || !config.sections.length) throw new Error('Definire almeno una sezione in publications.config.json.');
+  const sectionIds = new Set();
+  for (const section of config.sections) {
+    if (!section.id || !section.title || sectionIds.has(section.id)) throw new Error(`Sezione non valida o ID duplicato: ${section.id}`);
+    sectionIds.add(section.id);
+  }
+  if (!sectionIds.has(config.defaultSection)) throw new Error(`Sezione predefinita non definita: ${config.defaultSection}`);
+  for (const rule of config.rules) if (!sectionIds.has(rule.section)) throw new Error(`Sezione non definita nella regola: ${rule.section}`);
   const documents = discover(config);
   clean();
   if (!documents.length) throw new Error('Nessun documento corrisponde alle regole di pubblicazione.');
@@ -109,6 +120,7 @@ function build() {
   mkdirSync(path.dirname(catalogFile), { recursive: true });
   const catalog = documents.map(({ order, ...document }) => document);
   writeFileSync(catalogFile, `${JSON.stringify(catalog, null, 2)}\n`);
+  writeFileSync(sectionsFile, `${JSON.stringify({ defaultSection: config.defaultSection, sections: config.sections }, null, 2)}\n`);
   console.log(`${catalog.length === 1 ? 'Generato 1 documento' : `Generati ${catalog.length} documenti`}.`);
 }
 
