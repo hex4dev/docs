@@ -17,7 +17,7 @@
   numero-gruppo: "14",
   versione: "0.1",
   data: "28/10/2026",
-  redattori: ("Matteo Angelini"),("Francesco Bassani")
+  redattori: ("Matteo Angelini", "Francesco Bassani"),
   registro: (
     ("0.1", "28/10/2026", "Matteo Angelini", "—", "Creazione dello scheletro del documento"),
 	("0.2", "29/10/2026", "Francesco Bassani", "—", "Completamento lettera "),
