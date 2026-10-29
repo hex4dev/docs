@@ -20,6 +20,7 @@
   redattori: ("Matteo Angelini"),
   registro: (
     ("0.1", "28/10/2026", "Matteo Angelini", "—", "Creazione dello scheletro del documento"),
+	("0.2", "29/10/2026", "Francesco Bassani", "—", "Completamento lettera "),
   ),
 )
 
@@ -27,31 +28,33 @@ Con la presente, il gruppo Hex4dev intende comunicarVi la volontà di
 candidarsi e impegnarsi nello sviluppo e realizzazione del capitolato
 denominato:
 
-#todo[specificare capitolato scelto]
+C3 - Fossdot: Smart Speaker Open Source estensibile e rispettoso della privacy
 
-proposto dall'azienda #todo[specificare azienda]. 
+proposto dall'azienda Uranion EMEA LTD. 
 
 La repository della documentazione relativa alla candidatura è disponibile al seguente link:
 
-#todo[link repo]
+https://github.com/hex4dev/docs/
+
+https://hex4dev.github.io/docs/
 
 I documenti forniti sono:
 
-- Analisi e Valutazione dei capitolati #todo[link diretto];
+- Analisi e Valutazione dei capitolati https://github.com/hex4dev/docs/blob/main/candidatura/valutazione-capitolati/valutazione-capitolati.typ;
 
-- Preventivo dei costi e assunzione di impegni #todo[link diretto];
+- Preventivo dei costi e assunzione di impegni https://github.com/hex4dev/docs/blob/main/dichiarazione-impegni/dichiarazione-impegni.typ;
 
 - Verbali degli incontri esterni con le aziende:
-	- 21-10-2026 #todo[link diretto];
-	- 28-10-2026 #todo[link diretto];
+	- 21-10-2026 https://github.com/hex4dev/docs/blob/main/candidatura/verbali/esterni/2026-10-21/verbale-esterno.typ;
+	- 28-10-2026 https://github.com/hex4dev/docs/blob/main/candidatura/verbali/esterni/2026-10-28/verbale-esterno.typ;
 
 - Verbali degli incontri interni:
-	- 26-10-2026 #todo[link diretto];
-	- 28-10-2026 #todo[link diretto];
+	- 26-10-2026 https://github.com/hex4dev/docs/blob/main/candidatura/verbali/interni/2026-10-26/verbale-interno.typ;
+	- 28-10-2026 https://github.com/hex4dev/docs/blob/main/candidatura/verbali/interni/2026-10-28/verbale-interno.typ;
 
 All’interno del documento dedicato, è preventivato il costo stimato alla
-realizzazione del prodotto, valore individuato a XXXXX € con data di
-consegna prevista entro il XX-XX-XXXX. #todo[specificare costo e data di fine]
+realizzazione del prodotto, valore individuato a 11040 € con data di
+consegna prevista entro il 27-03-2027. 
 
 Cordiali Saluti,\
 Hex4dev - Gruppo 14
