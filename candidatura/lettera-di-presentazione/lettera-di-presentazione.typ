@@ -2,7 +2,7 @@
 //  Lettera di Presentazione - candidatura del gruppo hex4dev
 //
 //  Compilazione dalla root del repository:
-//    typst compile --root . 01-Candidatura/Lettera-di-Prestazione/Lettera-di-Presentazione.typ
+//    typst compile --root . candidatura/lettera-di-presentazione/lettera-di-presentazione.typ
 //
 //  Ripartizione della scrittura (riunione del 26/10/2026):
 //	  - scheletro: Matteo Angelini
