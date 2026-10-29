@@ -5,13 +5,14 @@
   sottotitolo: "Progetto di Ingegneria del Software",
   gruppo: "Hex4dev",
   numero-gruppo: "14",
-  versione: "0.1",
-  data: "28/10/2026",
+  versione: "0.2",
+  data: "29/10/2026",
   uso: "Interno",
   redattori: ("Alessandro Zanier", "Andrea Nogara"),
   verificatori: ("Francesco Bassani", "Alessandro Ravenna"),
   registro: (
     ("0.1", "28/10/2026", "Alessandro Zanier", "-", "Prima stesura"),
+    ("0.2", "29/10/2026", "Andrea Nogara", "-", "Continuazione stesura"),
   ),
 )
 
@@ -24,21 +25,19 @@ Vengono in particolare illustrati l'impegno orario suddiviso per membro e ruolo,
 == Suddivisione e costo orario
 
 #tabella(
-  (1fr, 1fr, 1fr, 1fr),
-  ("Ruolo", "Ore totali previste", "Costo/ora", "Costo totale"),
-  ([Responsabile], [#todo[X]], [€ 30,00], [€ #todo[X \* 30]],
-   [Amministratore], [#todo[X]], [€ 20,00], [€ #todo[X \* 20]],
-   [Analista], [#todo[X]], [€ 25,00], [€ #todo[X \* 25]],
-   [Progettista], [#todo[X]], [€ 25,00], [€ #todo[X \* 25]],
-   [Programmatore], [#todo[X]], [€ 15,00], [€ #todo[X \* 15]],
-   [Verificatore], [#todo[X]], [€ 15,00], [€ #todo[X \* 15]]),
+  (1fr, 1fr, 1fr, 1fr, 1fr),
+  ("Ruolo", "Ore individuali previste" ,"Ore totali previste", "Costo/ora", "Costo totale"),
+  ([Responsabile], [9], [54], [€ 30,00], [€ 1.620,00],
+   [Amministratore], [7], [42], [€ 20,00], [€ 840,00],
+   [Analista], [12], [72], [€ 25,00], [€ 1.800,00],
+   [Progettista], [20], [120], [€ 25,00], [€ 3.000,00],
+   [Programmatore], [24], [144], [€ 15,00], [€ 2.160,00],
+   [Verificatore], [18], [108], [€ 15,00], [€ 1.620,00]),
 )
 
 == Preventivo costi
 
-#todo[Stabilire costo come somma di costi \* ora, deve essere >= ~10300€]
-
-Il costo totale stimato per la realizzazione del progetto è di € XXXXX.
+Il costo totale stimato per la realizzazione del progetto è di € 11.040,00.
 
 = Analisi dei ruoli e motivazioni
 
@@ -64,20 +63,12 @@ Valuta la conformità degli artefatti rispetto ai requisiti e agli standard di q
 
 == Motivazione suddivisione Ore
 
-#todo[Stabilire la suddivisione nei vari ruoli e il numero di ore per membro, compatibilmente alla rotazione. Discutere il ruolo degli strumenti agentici, stabilire meglio responsabilità del verificatore vs programmatore]
+Il gruppo è composto da 6 membri e ciascuno assicura di dedicare al progetto 90 ore, per un totale di 540 ore, la ripartizione delle ore tra i ruoli riflette il peso di ciascuna attività nel ciclo di sviluppo, progettazione e codifica sono le fasi più onerose e hanno una quota maggiore, mentre i ruoli di natura organizzativa hanno tempo limitato rispetto al resto. 
 
 == Rotazione dei ruoli
 
-#todo[Auspicabile stabilire subito modalità di rotazione]
-
-I ruoli verrano ricoperti, a rotazione con modalità da stabilire dopo l'aggiudicazione, da tutti i membri del gruppo, per garantire che ciascuno conosca e sappia mettere in pratica le funzioni di ogni ruolo. 
-
-= Rischi e mitigazione
-
-#todo[Azioni per evitare di sforare budget/monte ore]
+I ruoli verranno ricoperti a rotazione con cadenza bisettimanale, da tutti i membri del gruppo. Per garantire la rotazione dei ruoli, ogni membro ricoprirà ogni ruolo per lo stesso numero di ore, avendo alla fine acquisito esperienza in modo equo per ogni ruolo.
 
 = Data di consegna
 
-Il gruppo si impegna a rispettare la data prevista di consegna del prodotto, fissata al XX/YY/2026.
-
-#todo[selezionare ca. entro 20 sett. dal 3 novembre, metà marzo/inizio aprile] 
+Il gruppo si impegna a rispettare la data prevista di consegna del prodotto, fissata al 26/03/2027.
