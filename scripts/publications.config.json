@@ -27,6 +27,30 @@
       "category": "Verbali interni",
       "titleTemplate": "Verbale interno — {dateIT}",
       "idTemplate": "verbale-interno-{date}"
+    },
+    {
+      "root": "candidatura",
+      "match": "^candidatura/lettera-di-presentazione/lettera-di-presentazione\\.typ$",
+      "section": "candidatura",
+      "category": "Lettera di presentazione",
+      "title": "Lettera di presentazione",
+      "id": "lettera-di-presentazione"
+    },
+    {
+      "root": "candidatura",
+      "match": "^candidatura/valutazione-capitolati/valutazione-capitolati\\.typ$",
+      "section": "candidatura",
+      "category": "Valutazione capitolati",
+      "title": "Valutazione capitolati",
+      "id": "valutazione-capitolati"
+    },
+    {
+      "root": "dichiarazione-impegni",
+      "match": "^dichiarazione-impegni/dichiarazione-impegni\\.typ$",
+      "section": "candidatura",
+      "category": "Dichiarazione impegni",
+      "title": "Dichiarazione degli impegni",
+      "id": "dichiarazione-impegni"
     }
   ],
   "overrides": {}
