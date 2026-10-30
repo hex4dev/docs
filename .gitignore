@@ -1,4 +1,4 @@
-candidatura/**/*.pdf
+# candidatura/**/*.pdf
 sito/node_modules/
 sito/dist/
 sito/.astro/
