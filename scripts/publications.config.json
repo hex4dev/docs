@@ -45,8 +45,8 @@
       "id": "valutazione-capitolati"
     },
     {
-      "root": "dichiarazione-impegni",
-      "match": "^dichiarazione-impegni/dichiarazione-impegni\\.typ$",
+      "root": "candidatura",
+      "match": "^candidatura/dichiarazione-impegni/dichiarazione-impegni\\.typ$",
       "section": "candidatura",
       "category": "Dichiarazione impegni",
       "title": "Dichiarazione degli impegni",

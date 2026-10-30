@@ -106,11 +106,19 @@ function build() {
   for (const document of documents) {
     const output = path.join(root, 'sito/public', document.pdfPath);
     mkdirSync(path.dirname(output), { recursive: true });
-    try {
-      execFileSync('typst', ['compile', '--root', '.', document.sourcePath, output], { cwd: root, stdio: 'inherit' });
-    } catch (error) {
-      throw new Error(error.code === 'ENOENT' ? 'Typst non disponibile nel PATH: installa la versione 0.15.1.'
-        : `Compilazione fallita: ${document.sourcePath}`, { cause: error });
+    const uploadedPdf = path.join(root, document.sourcePath.replace(/\.typ$/, '.pdf'));
+    if (existsSync(uploadedPdf)) {
+      const info = lstatSync(uploadedPdf);
+      if (!info.isFile() || info.size === 0) throw new Error(`PDF caricato mancante, non valido o vuoto: ${uploadedPdf}`);
+      copyFileSync(uploadedPdf, output);
+      console.log(`Usato PDF caricato: ${document.sourcePath.replace(/\.typ$/, '.pdf')}`);
+    } else {
+      try {
+        execFileSync('typst', ['compile', '--root', '.', document.sourcePath, output], { cwd: root, stdio: 'inherit' });
+      } catch (error) {
+        throw new Error(error.code === 'ENOENT' ? 'Typst non disponibile nel PATH: installa la versione 0.15.1.'
+          : `Compilazione fallita: ${document.sourcePath}`, { cause: error });
+      }
     }
     const info = lstatSync(output);
     if (!info.isFile() || info.size === 0) throw new Error(`PDF mancante o vuoto: ${document.sourcePath}`);
