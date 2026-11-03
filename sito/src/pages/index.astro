@@ -5,10 +5,23 @@ import teamMembers from '../data/team-members.json';
 import { siteUrl, sourceUrl } from '../utils/urls.js';
 import '../styles/global.css';
 
-const categories = [...new Set(documents.map((document) => document.category))].sort((a, b) => a.localeCompare(b, 'it'));
-const dateLabel = (date) => date
-  ? new Intl.DateTimeFormat('it-IT', { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(`${date}T00:00:00.000Z`))
-  : 'Data non indicata';
+const categories = [...new Set(documents.map((document) => document.category))].sort((a, b) => {
+  const aPinned = sectionConfig.pinnedCategories.indexOf(a);
+  const bPinned = sectionConfig.pinnedCategories.indexOf(b);
+  if (aPinned !== -1 || bPinned !== -1) {
+    if (aPinned === -1) return 1;
+    if (bPinned === -1) return -1;
+    return aPinned - bPinned;
+  }
+  return a.localeCompare(b, 'it');
+});
+const featuredDocuments = documents.filter((document) => document.placement === 'above-archive');
+const archiveDocuments = documents.filter((document) => document.placement !== 'above-archive');
+const categoryGroups = categories.map((category) => ({
+  category,
+  documents: archiveDocuments.filter((document) => document.category === category),
+})).filter((group) => group.documents.length);
+const dateLabel = (date) => date ? date.replaceAll('-', '/') : '';
 ---
 
 <!doctype html>
@@ -51,6 +64,10 @@ const dateLabel = (date) => date
             </li>
           ))}
         </ul>
+        <div class="team-contact">
+          <span>Contatto</span>
+          <a href="mailto:hex4dev@gmail.com">hex4dev@gmail.com</a>
+        </div>
       </section>
 
       <nav class="section-nav" aria-label="Sezioni" data-default-section={sectionConfig.defaultSection}>
@@ -71,36 +88,35 @@ const dateLabel = (date) => date
             <label class="visually-hidden" for="document-search">Cerca per titolo, categoria o data</label>
             <input id="document-search" type="search" placeholder="Cerca per titolo, categoria o data" autocomplete="off" />
           </div>
-          <div class="filters" role="group" aria-label="Filtra per categoria">
-            <button class="filter-button is-active" type="button" data-category="all" aria-pressed="true">Tutti</button>
-            {categories.map((category) => (
-              <button class="filter-button" type="button" data-category={category} aria-pressed="false">{category}</button>
-            ))}
-          </div>
         </div>
 
+        {featuredDocuments.map((document) => (
+          <article class="featured-document" data-document data-section={document.section} data-category={document.category} data-search={`${document.title} ${document.category} ${document.type} ${document.date ?? ''} ${dateLabel(document.date)}`.toLocaleLowerCase('it-IT')}>
+            <div class="document-title-line"><h2>{document.title}</h2>{document.version && <span class="version-badge">v{document.version}</span>}</div>
+            <div class="document-actions" aria-label={`Azioni per ${document.title}`}>
+              <a class="action-link action-primary" href={siteUrl(document.pdfPath)} target="_blank" rel="noopener noreferrer">Apri</a>
+              <a class="action-link" href={sourceUrl(document.sourcePath)} target="_blank" rel="noopener noreferrer" aria-label={`Sorgente Typst su GitHub: ${document.title}`}>Sorgente</a>
+            </div>
+          </article>
+        ))}
+
         <div class="document-list" id="document-list">
-          {documents.map((document) => (
-            <article
-              class="document-row"
-              data-document
-              data-section={document.section}
-              data-category={document.category}
-              data-search={`${document.title} ${document.category} ${document.type} ${document.date ?? ''} ${dateLabel(document.date)}`.toLocaleLowerCase('it-IT')}
-            >
-              <div class="document-main">
-                <h3>{document.title}</h3>
-                <p class="document-meta">
-                  <span>{document.category}</span>
-                  <span aria-hidden="true">·</span>
-                  <time datetime={document.date ?? undefined}>{dateLabel(document.date)}</time>
-                </p>
-              </div>
-              <div class="document-actions" aria-label={`Azioni per ${document.title}`}>
-                <a class="action-link action-primary" href={siteUrl(document.pdfPath)} target="_blank" rel="noopener noreferrer">Apri</a>
-                <a class="action-link" href={sourceUrl(document.sourcePath)} target="_blank" rel="noopener noreferrer" aria-label={`Sorgente Typst su GitHub: ${document.title}`}>Sorgente</a>
-              </div>
-            </article>
+          {categoryGroups.map(({ category, documents: categoryDocuments }) => (
+            <section class="category-group" data-category-group={category} aria-label={category}>
+              <h3>{category}</h3>
+              {categoryDocuments.map((document) => (
+                <article class="document-row" data-document data-section={document.section} data-category={document.category} data-search={`${document.title} ${document.category} ${document.type} ${document.date ?? ''} ${dateLabel(document.date)}`.toLocaleLowerCase('it-IT')}>
+                  <div class="document-main">
+                    <div class="document-title-line"><h4>{document.title}</h4>{document.version && <span class="version-badge">v{document.version}</span>}</div>
+                    {document.date && <p class="document-meta"><time datetime={document.date}>{dateLabel(document.date)}</time></p>}
+                  </div>
+                  <div class="document-actions" aria-label={`Azioni per ${document.title}`}>
+                    <a class="action-link action-primary" href={siteUrl(document.pdfPath)} target="_blank" rel="noopener noreferrer">Apri</a>
+                    <a class="action-link" href={sourceUrl(document.sourcePath)} target="_blank" rel="noopener noreferrer" aria-label={`Sorgente Typst su GitHub: ${document.title}`}>Sorgente</a>
+                  </div>
+                </article>
+              ))}
+            </section>
           ))}
         </div>
 
@@ -117,24 +133,24 @@ const dateLabel = (date) => date
 </html>
 
 <script>
-  import { matchesDocumentSearch } from '../utils/document-search.js';
-
   const input = document.querySelector('#document-search');
-  const filterButtons = [...document.querySelectorAll('.filters button[data-category]')];
   const sectionButtons = [...document.querySelectorAll('.section-nav button[data-section]')];
   const cards = [...document.querySelectorAll('[data-document]')];
+  const categoryGroups = [...document.querySelectorAll('[data-category-group]')];
   const count = document.querySelector('#result-count');
   const emptyState = document.querySelector('#empty-state');
-  let activeCategory = 'all';
   let activeSection = document.querySelector('.section-nav').dataset.defaultSection;
 
   function filterDocuments() {
     const query = input.value.trim().toLocaleLowerCase('it-IT');
     let visibleCount = 0;
     for (const card of cards) {
-      const visible = card.dataset.section === activeSection && matchesDocumentSearch(card.dataset.search, card.dataset.category, query, activeCategory);
+      const visible = card.dataset.section === activeSection && card.dataset.search.includes(query);
       card.hidden = !visible;
       if (visible) visibleCount += 1;
+    }
+    for (const group of categoryGroups) {
+      group.hidden = !group.querySelector('[data-document]:not([hidden])');
     }
     count.textContent = String(visibleCount);
     emptyState.hidden = visibleCount !== 0;
@@ -153,16 +169,4 @@ const dateLabel = (date) => date
   }
 
   input.addEventListener('input', filterDocuments);
-  for (const button of filterButtons) {
-    button.addEventListener('click', () => {
-      activeCategory = button.dataset.category;
-      for (const candidate of filterButtons) {
-        const selected = candidate === button;
-        candidate.classList.toggle('is-active', selected);
-        candidate.setAttribute('aria-pressed', String(selected));
-      }
-      filterDocuments();
-    });
-  }
-
 </script>

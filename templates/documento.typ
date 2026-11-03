@@ -58,7 +58,11 @@
   logo: "/assets/hex4dev_logo.png",
   body,
 ) = {
-  set document(title: titolo, author: gruppo)
+  set document(
+    title: titolo,
+    author: gruppo,
+    keywords: ("version=" + versione),
+  )
   set text(lang: "it", size: 11pt, fill: colore-testo,
            font: ("Inter", "Noto Sans", "Liberation Sans", "DejaVu Sans"))
   set par(justify: true, leading: 0.65em)

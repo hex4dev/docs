@@ -15,7 +15,7 @@
   titolo: "Lettera di Presentazione",
   sottotitolo: "Candidatura · Anno accademico 2026/2027",
   numero-gruppo: "14",
-  versione: "0.1",
+  versione: "0.2",
   data: "28/10/2026",
   redattori: ("Matteo Angelini", "Francesco Bassani"),
   registro: (

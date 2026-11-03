@@ -49,8 +49,18 @@ function metadata(sourcePath, rule, captures, override = {}) {
     id: slugify(field('id', sourcePath.replace(/\.typ$/, ''))),
     title: override.title ?? field('title', titleCase(captures.slug ?? path.posix.basename(sourcePath, '.typ'))),
     category, type: override.type ?? field('type', slugify(category)), date, sourcePath, pdfPath,
+    placement: override.placement ?? rule.placement ?? null,
+    readVersion: override.readVersion ?? rule.readVersion ?? false,
     order: override.order ?? Infinity,
   };
+}
+
+function pdfVersion(pdfPath) {
+  const pdf = readFileSync(pdfPath, 'latin1');
+  const encodedKeywords = pdf.match(/\/Keywords\s*\(((?:\\.|[^\\)])*)\)/)?.[1];
+  if (encodedKeywords === undefined) return null;
+  const keywords = encodedKeywords.replace(/\\([\\()])/g, '$1');
+  return keywords.match(/(?:^|,\s*)version=([^,\s)]+)/)?.[1] ?? null;
 }
 
 function discover(config) {
@@ -122,13 +132,18 @@ function build() {
     }
     const info = lstatSync(output);
     if (!info.isFile() || info.size === 0) throw new Error(`PDF mancante o vuoto: ${document.sourcePath}`);
+    document.version = document.readVersion ? pdfVersion(output) : null;
   }
   mkdirSync(path.dirname(logoFile), { recursive: true });
   copyFileSync(path.join(root, 'assets/hex4dev_logo.png'), logoFile);
   mkdirSync(path.dirname(catalogFile), { recursive: true });
-  const catalog = documents.map(({ order, ...document }) => document);
+  const catalog = documents.map(({ order, readVersion, ...document }) => document);
   writeFileSync(catalogFile, `${JSON.stringify(catalog, null, 2)}\n`);
-  writeFileSync(sectionsFile, `${JSON.stringify({ defaultSection: config.defaultSection, sections: config.sections }, null, 2)}\n`);
+  writeFileSync(sectionsFile, `${JSON.stringify({
+    defaultSection: config.defaultSection,
+    sections: config.sections,
+    pinnedCategories: config.pinnedCategories ?? [],
+  }, null, 2)}\n`);
   console.log(`${catalog.length === 1 ? 'Generato 1 documento' : `Generati ${catalog.length} documenti`}.`);
 }
 
