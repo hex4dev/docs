@@ -1,5 +1,9 @@
 {
   "defaultSection": "candidatura",
+  "pinnedCategories": [
+    "Dichiarazione impegni",
+    "Valutazione capitolati"
+  ],
   "sections": [
     { "id": "candidatura", "title": "Candidatura" }
   ],
@@ -34,7 +38,9 @@
       "section": "candidatura",
       "category": "Lettera di presentazione",
       "title": "Lettera di presentazione",
-      "id": "lettera-di-presentazione"
+      "id": "lettera-di-presentazione",
+      "placement": "above-archive",
+      "readVersion": true
     },
     {
       "root": "candidatura",
@@ -42,7 +48,8 @@
       "section": "candidatura",
       "category": "Valutazione capitolati",
       "title": "Valutazione capitolati",
-      "id": "valutazione-capitolati"
+      "id": "valutazione-capitolati",
+      "readVersion": true
     },
     {
       "root": "candidatura",
@@ -50,7 +57,8 @@
       "section": "candidatura",
       "category": "Dichiarazione impegni",
       "title": "Dichiarazione degli impegni",
-      "id": "dichiarazione-impegni"
+      "id": "dichiarazione-impegni",
+      "readVersion": true
     }
   ],
   "overrides": {}
