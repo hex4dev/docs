@@ -27,7 +27,7 @@
 
 #show: verbale-interno.with(
   numero: "VI-2026-11-03",
-  data: "03/11/2026",
+  data: "2026-11-03",
   ora-inizio: "15:00",
   ora-fine: "16:20",
   luogo: "Online (Discord)",
@@ -50,7 +50,7 @@
 
 = Resoconto
 == Esito dell'aggiudicazione e candidatura al C7
-Il C3 non è stato assegnato al gruppo, che si candida al C7 (SmartDashboard, Ergon), già indicato come alternativa. Si rivedono i documenti esistenti, senza riscriverli, per consegnare la nuova candidatura entro il 10/11/2026.
+Il C3 non è stato assegnato al gruppo, che si candida al C7 (SmartDashboard, Ergon), già indicato come alternativa. Si rivedono i documenti esistenti, senza riscriverli, per consegnare la nuova candidatura entro il 2026-11-10.
 
 == Riscontri del docente e dichiarazione degli impegni
 I rilievi riguardano la distribuzione di tempo e ruoli, il versionamento (ordine e verifica del registro delle modifiche) e i verbali, troppo verbosi e con scadenze non definite. È stata esaminata la nuova versione della dichiarazione degli impegni, scritta sul C3 e da adattare al C7 (decisione D5).
@@ -63,7 +63,7 @@ Il gruppo ha assegnato i ruoli del primo sprint (decisione D6) e ripartito le at
 
 = Decisioni
 #decisioni(
-  [La nuova candidatura al C7 si prepara revisionando i documenti esistenti e si consegna entro il 10/11/2026 (data indicativa), con lettera di presentazione aggiornata.#azioni-correlate("A3", "A5", "A6", "A7", "A10")],
+  [La nuova candidatura al C7 si prepara revisionando i documenti esistenti e si consegna entro il 2026-11-10 (data indicativa), con lettera di presentazione aggiornata.#azioni-correlate("A3", "A5", "A6", "A7", "A10")],
   [I verbali già emessi non sono modificati; i nuovi sono sintetici e riportano scadenze definite per ogni attività.#azioni-correlate("A2")],
   [Il registro delle modifiche di ogni documento è ordinato dal più recente e riporta autore e verificatore, diversi tra loro.#azioni-correlate("A8", "A9")],
   [Ogni attività del verbale ha una issue GitHub assegnata al responsabile; i link sono riportati nel verbale.#azioni-correlate("A1")],
@@ -76,17 +76,17 @@ Il gruppo ha assegnato i ruoli del primo sprint (decisione D6) e ripartito le at
 = Attività da svolgere
 #attivita(
   "VI-2026-11-03",
-  ([#rif("D4") \ Creare le issue delle attività e comunicarne i link al verbalizzante], [Alessandro Zanier], [03/11/2026], []),
-  ([#rif("D2") \ Redigere i verbali del 02/11 e del 03/11], [Francesco Bassani], [03/11/2026], []),
-  ([#rif("D1", "D5", "D6") \ Condividere la dichiarazione degli impegni aggiornata], [Francesco Bassani], [03/11/2026], []),
-  ([#rif("D7") \ Sistemare versionamento dei documenti e date del sito], [Alessandro Zanier], [06/11/2026], []),
-  ([#rif("D1") \ Verificare e aggiornare la valutazione dei capitolati], [Matilde Pedrocchi], [06/11/2026], []),
-  ([#rif("D1") \ Redigere il diario di bordo], [Matteo Angelini], [06/11/2026], []),
-  ([#rif("D1") \ Esaminare le repository degli altri gruppi], [Alessandro Ravenna], [06/11/2026], []),
-  ([#rif("D3") \ Indicare il verificatore e ordinare il registro delle modifiche nei documenti modificati], [Tutti i componenti], [10/11/2026], []),
-  ([#rif("D3") \ Verificare tutti i documenti di candidatura], [Alessandro Ravenna, Andrea Nogara], [10/11/2026], []),
-  ([#rif("D1") \ Consegnare la nuova candidatura al C7], [Tutto il gruppo], [10/11/2026], []),
+  ([#rif("D4") \ Creare le issue delle attività e comunicarne i link al verbalizzante], [Alessandro Zanier], [2026-11-03], []),
+  ([#rif("D2") \ Redigere i verbali del 2026-11-02 e del 2026-11-03], [Francesco Bassani], [2026-11-03], []),
+  ([#rif("D1", "D5", "D6") \ Condividere la dichiarazione degli impegni aggiornata], [Francesco Bassani], [2026-11-03], [#issue(32)]),
+  ([#rif("D7") \ Sistemare versionamento dei documenti e date del sito], [Alessandro Zanier], [2026-11-06], []),
+  ([#rif("D1") \ Verificare e aggiornare la valutazione dei capitolati], [Matilde Pedrocchi], [2026-11-06], [#issue(33)]),
+  ([#rif("D1") \ Redigere il diario di bordo], [Matteo Angelini], [2026-11-06], [#issue(34)]),
+  ([#rif("D1") \ Esaminare le repository degli altri gruppi], [Alessandro Ravenna], [2026-11-06], [#issue(36)]),
+  ([#rif("D3") \ Indicare il verificatore e ordinare il registro delle modifiche nei documenti modificati], [Tutti i componenti], [2026-11-10], [#issue(37)]),
+  ([#rif("D3") \ Verificare tutti i documenti di candidatura], [Alessandro Ravenna, Andrea Nogara], [2026-11-10], [#issue(35)]),
+  ([#rif("D1") \ Consegnare la nuova candidatura al C7], [Tutto il gruppo], [2026-11-10], [#issue(38)]),
 )
 
 = Prossima riunione
-Venerdì 06/11/2026, ore 15:00, online (Discord).
+Venerdì 2026-11-06, ore 15:00, online (Discord).
