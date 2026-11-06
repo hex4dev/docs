@@ -17,13 +17,14 @@
   titolo: "Valutazione Capitolati",
   sottotitolo: "Candidatura · Anno accademico 2026/2027",
   numero-gruppo: "14",
-  versione: "0.2",
-  data: "27/10/2026",
-  redattori: ("Francesco Bassani", "Alessandro Ravenna"),
-  verificatori: ("Alessandro Zanier", "Andrea Nogara"),
+  versione: "1.0",
+  data: "2026/11/06",
+  redattori: ("Francesco Bassani", "Alessandro Ravenna, Matilde Pedrocchi"),
+  verificatori: ("Alessandro Zanier", "Andrea Nogara", "Matteo Angelini"),
   registro: (
-    ("0.2", "27/10/2026", "Francesco Bassani", "Alessandro Zanier, Andrea Nogara", "Valutazione dei capitolati da C5 a C9"),
-    ("0.1", "27/10/2026", "Francesco Bassani", "—", "Creazione dello scheletro del documento"),
+    ("1.0", "2026/11/06", "Matilde Pedrocchi", "Matteo Angelini", "Riscrittura sezione 'Capitolato selezionato' per il capitolato C7, omologazione di tutte le date al formato anno/mese/giorno"),
+    ("0.2", "2026/10/27", "Francesco Bassani", "Alessandro Zanier, Andrea Nogara", "Valutazione dei capitolati da C5 a C9"),
+    ("0.1", "2026/10/27", "Francesco Bassani", "—", "Creazione dello scheletro del documento"),
   ),
 )
 
@@ -301,4 +302,12 @@ Capitolato innovativo e molto pertinente al corso, con un buon accesso ai modell
 = Capitolato selezionato
 
 == Valutazioni finali
-Il gruppo ha scelto il capitolato C3 – FossDot come prima scelta per la candidatura, [inserire qui il motivo principale]. Come seconda scelta ha individuato il C7 – SmartDashboard, interamente software, con un percorso incrementale chiaro e un proponente disponibile al confronto. Gli altri capitolati non sono stati selezionati per ambito troppo ampio, vincoli tecnologici o forte dipendenza da componenti esterni.
+Tra i capitolati rimanenti dopo la scadenza di candidatura sincrona, il gruppo Hex4dev ha scelto di presentare la candidatura per il capitolato C7 (SmartDashboard: piattaforma di Business 
+Intelligence self-service potenziata da AI), proposto dall'azienda Ergon. 
+
+È stato preferito questo capitolato rispetto ad altri per queste motivazioni principali:
+
++ *Disponibilità della proponente*: L'azienda si è resa disponibile a riunioni fisse a cadenza quindicinale, con la possibilità di fissare ulteriori incontri in caso di bisogno. Indica inoltre di essere disponibile a comunicare anche in modalità asincrona (Per ulteriori informazioni è possibile visionare il verbale dell'incontro esplorativo).
++ *Approccio incrementale*: Struttura di base (Piattaforma BI) da poi espandere con altre funzionalità (Layer di AI), che possono essere più facilmente rinegoziate in caso di bisogno.
++ *Tecnologie consigliate ma non rigide*: La proponente ha offerto una lista di tecnologie che suggerische di utilizzare, correlate con motivazioni di questi suggerimenti, oltre che di link di approfondimento e sitografia. Queste però sono, appunto, dei suggerimenti e la scelta finale viene lasciata al gruppo.
++ *Chiara priorità dei requisiti*: Le caratteristiche che la proponente desidera che il prodotto possieda sono chiaramente ordinate per importanza attribuita oppure esplicitamente definite come necessarie, desiderabili o estensioni. È quindi facile capire su quali aspetti concentrarsi e quali invece possono essere implementati in un secondo momento o messi da parte in caso di necessità.
