@@ -276,7 +276,7 @@ I rischi sono divisi in tre gruppi: tecnologici, legati ai requisiti e organizza
   caption: [Impegni assunti dal gruppo],
 ) <tab-impegni>
 
-*Data di consegna.* Il gruppo prevede di iniziare il 2026-11-04, il giorno dopo l'aggiudicazione, e si impegna a consegnare entro venerdì 2027-03-26: venti settimane di lavoro, fino a martedì 2027-03-23, più tre giorni lavorativi di margine, compresi nell'ultimo sprint. Se la validazione con Ergon si conclude prima, il gruppo consegna prima.
+*Data di consegna.* Il gruppo prevede di iniziare il giorno dopo l'aggiudicazione, e si impegna a consegnare entro venerdì 2027-03-26: venti settimane di lavoro, fino a martedì 2027-03-23, più tre giorni lavorativi di margine, compresi nell'ultimo sprint. Se la validazione con Ergon si conclude prima, il gruppo consegna prima.
 
 *Monte ore.* Ogni componente dedica al progetto 90 ore produttive, entro il limite massimo di 95 ore fissato dal regolamento, in media circa 4,4 ore a settimana; il gruppo nel complesso 540 ore. Il preventivo riguarda solo il lavoro successivo all'aggiudicazione: le ore spese per la candidatura non sono incluse.
 
