@@ -42,7 +42,7 @@ Chi verifica il documento controlla i punti seguenti e ne riporta l'esito nel re
 + Il costo di ogni ruolo è il prodotto di ore e costo orario; la somma dei costi è 11.040,00 € ed è uguale alla somma dei costi dei due periodi.
 + Le ore degli sprint nel calendario sommano a 540 e, sommate per periodo, coincidono con la tabella dei periodi.
 + I ruoli iniziali rispettano le regole di organizzazione dei ruoli e le loro ore coincidono con quelle previste per il primo sprint.
-+ Le date degli sprint sono consecutive, dal 2026-11-04 al 2027-03-26, e la data di consegna coincide con quella degli impegni assunti.
++ Le date degli sprint sono consecutive, dal 2026-11-11 al 2027-04-02, e la data di consegna coincide con quella degli impegni assunti.
 + Ogni affermazione sul prodotto trova riscontro nel capitolato C7 o nel verbale dell'incontro con Ergon del 2026-10-28, e ogni decisione organizzativa nei verbali interni o in questo documento.
 + Ogni versione del registro delle modifiche ha un autore e un verificatore diversi.
 
@@ -117,7 +117,7 @@ Ogni componente si impegna per 90 ore e ricopre, nel corso del progetto, tutti e
 
 = Organizzazione dei ruoli <sez-ruoli>
 
-*Sprint e incontri.* Il lavoro è organizzato in dieci sprint di due settimane, che iniziano di lunedì (salvo il primo, che parte mercoledì 2026-11-04). La durata coincide con la cadenza dell'allineamento ricorrente che Ergon propone ogni quindici giorni: il gruppo chiederà di fissarlo verso la fine di ogni sprint, così da mostrare l'avanzamento e portare le indicazioni ricevute nella pianificazione dello sprint successivo. All'interno del gruppo resta l'incontro fisso settimanale, deciso il 2026-10-26, il lunedì alle 15:00 su Discord: nei lunedì di inizio sprint diventa la riunione di chiusura dello sprint precedente e di pianificazione del nuovo. Con circa 4,4 ore settimanali a testa, due settimane bastano per completare e verificare un incremento piccolo ma concreto, e dieci sprint lasciano a ciascuno il tempo di ricoprire tutti i ruoli.
+*Sprint e incontri.* Il lavoro è organizzato in dieci sprint di due settimane, che iniziano di lunedì (salvo il primo, che parte mercoledì 2026-11-11). La durata coincide con la cadenza dell'allineamento ricorrente che Ergon propone ogni quindici giorni: il gruppo chiederà di fissarlo verso la fine di ogni sprint, così da mostrare l'avanzamento e portare le indicazioni ricevute nella pianificazione dello sprint successivo. All'interno del gruppo resta l'incontro fisso settimanale, deciso il 2026-10-26, il lunedì alle 15:00 su Discord: nei lunedì di inizio sprint diventa la riunione di chiusura dello sprint precedente e di pianificazione del nuovo. Con circa 4,4 ore settimanali a testa, due settimane bastano per completare e verificare un incremento piccolo ma concreto, e dieci sprint lasciano a ciascuno il tempo di ricoprire tutti i ruoli.
 
 *Tracciamento del lavoro.* Ogni attività è una issue su GitHub, assegnata a un componente e associata allo sprint, con il ruolo con cui viene svolta e le ore impiegate. Da qui il Responsabile ricava a fine sprint il consuntivo e il registro delle ore per componente e per ruolo. Ogni modifica a documenti e codice avviene su un proprio branch e viene integrata nel ramo principale tramite pull request, solo dopo l'approvazione di un Verificatore, come deciso dal gruppo il 2026-10-26.
 
@@ -183,17 +183,17 @@ Il capitolato lascia libera la scelta delle tecnologie e ne suggerisce alcune. I
     ("Sprint", "Date", "Ore", "Attività principali"),
     (
       table.cell(colspan: 4, fill: colore-sfondo.darken(8%))[*Periodo 1 – Requirements and Technology Baseline (RTB)*],
-      [S1], [2026-11-04 – 2026-11-15], [42], [Avvio: primo incontro con Ergon e richiesta dei dati del caso di studio; studio del capitolato; scelta dei referenti per area; tracciamento su GitHub; bozze di _Norme di Progetto_ e _Piano di Progetto_],
-      [S2], [2026-11-16 – 2026-11-29], [56], [Casi d'uso e requisiti, classificati in obbligatori, desiderabili e facoltativi; analisi dei dati del caso di studio; stato dell'arte su BI e interrogazione in linguaggio naturale],
-      [S3], [2026-11-30 – 2026-12-13], [58], [_Analisi dei Requisiti_; scelte tecnologiche definitive; avvio del PoC: caricamento dei dati e primo modello dimensionale],
-      [S4], [2026-12-14 – 2026-12-27], [42], [PoC: API e prima dashboard con alcuni widget (festività)],
-      [S5], [2026-12-28 – 2027-01-10], [42], [PoC: prima richiesta in linguaggio naturale tradotta in un grafico; _Piano di Qualifica_ (festività)],
-      [S6], [2027-01-11 – 2027-01-24], [48], [Completamento dei documenti e revisione RTB; avvio della progettazione (sessione d'esame)],
+      [S1], [2026-11-11 – 2026-11-22], [42], [Avvio: primo incontro con Ergon e richiesta dei dati del caso di studio; studio del capitolato; scelta dei referenti per area; tracciamento su GitHub; bozze di _Norme di Progetto_ e _Piano di Progetto_],
+      [S2], [2026-11-23 – 2026-12-06], [56], [Casi d'uso e requisiti, classificati in obbligatori, desiderabili e facoltativi; analisi dei dati del caso di studio; stato dell'arte su BI e interrogazione in linguaggio naturale],
+      [S3], [2026-12-07 – 2026-12-20], [58], [_Analisi dei Requisiti_; scelte tecnologiche definitive; avvio del PoC: caricamento dei dati e primo modello dimensionale],
+      [S4], [2026-12-21 – 2027-01-03], [42], [PoC: API e prima dashboard con alcuni widget (festività)],
+      [S5], [2027-01-04 – 2027-01-17], [42], [PoC: prima richiesta in linguaggio naturale tradotta in un grafico; _Piano di Qualifica_ (rientro dalle festività)],
+      [S6], [2027-01-18 – 2027-01-31], [48], [Completamento dei documenti e revisione RTB; avvio della progettazione (sessione d'esame)],
       table.cell(colspan: 4, fill: colore-sfondo.darken(8%))[*Periodo 2 – Product Baseline (PB)*],
-      [S7], [2027-01-25 – 2027-02-07], [46], [Correzioni dopo la RTB; progettazione architetturale dei tre livelli e del layer AI (sessione d'esame)],
-      [S8], [2027-02-08 – 2027-02-21], [56], [Progettazione di dettaglio; codifica di pipeline dei dati, API e costruttore di dashboard (sessione d'esame)],
-      [S9], [2027-02-22 – 2027-03-07], [70], [Codifica della libreria di widget, dei filtri e dell'esportazione; generazione di visualizzazioni da richieste in linguaggio naturale; test],
-      [S10], [2027-03-08 – 2027-03-26], [80], [Completamento e verifica dell'MVP; validazione con Ergon sui dati del caso di studio; _Specifica Architetturale_ e _Manuale Utente_; revisione PB e consegna],
+      [S7], [2027-02-01 – 2027-02-14], [46], [Correzioni dopo la RTB; progettazione architetturale dei tre livelli e del layer AI (sessione d'esame)],
+      [S8], [2027-02-15 – 2027-02-28], [56], [Progettazione di dettaglio; codifica di pipeline dei dati, API e costruttore di dashboard (sessione d'esame)],
+      [S9], [2027-03-01 – 2027-03-14], [70], [Codifica della libreria di widget, dei filtri e dell'esportazione; generazione di visualizzazioni da richieste in linguaggio naturale; test],
+      [S10], [2027-03-15 – 2027-04-02], [80], [Completamento e verifica dell'MVP; validazione con Ergon sui dati del caso di studio; _Specifica Architetturale_ e _Manuale Utente_; revisione PB e consegna (Pasqua)],
     ),
   ),
   kind: table,
@@ -203,7 +203,7 @@ Il capitolato lascia libera la scelta delle tecnologie e ne suggerisce alcune. I
 
 Il calendario segue l'approccio consigliato dal capitolato: prima una piattaforma di Business Intelligence funzionante dal dato alla dashboard, poi la capacità AI centrale, cioè la generazione di visualizzazioni da richieste in linguaggio naturale. Insight automatici, assistente nella costruzione delle dashboard e spiegazione degli indicatori sono estensioni: se ne valuterà l'inserimento tra i requisiti con Ergon, in base al tempo che resterà dopo l'MVP.
 
-Le ore per sprint tengono conto della durata e del periodo dell'anno. S1 dura dodici giorni; S4 e S5 cadono durante le festività e sono gli sprint con meno ore; da S6 a S8, nella sessione d'esame invernale, il carico resta contenuto. Le ore crescono in S9 e S10, dopo la sessione: S9 è lo sprint più intenso, circa 5,8 ore a settimana per componente, mentre S10 dura circa tre settimane e comprende la validazione con Ergon e la consegna. La milestone RTB è prevista alla fine di S6 (2027-01-24) e la PB alla fine di S10 (2027-03-26); le date delle revisioni saranno concordate con i docenti.
+Le ore per sprint tengono conto della durata e del periodo dell'anno. S1 dura dodici giorni; S4 cade durante le festività e S5 subito dopo, e sono gli sprint con meno ore; da S6 a S8, nella sessione d'esame invernale, il carico resta contenuto. Le ore crescono in S9 e S10, dopo la sessione: S9 è lo sprint più intenso, circa 5,8 ore a settimana per componente, mentre S10 dura circa tre settimane, comprende Pasqua e Pasquetta (2027-03-28 e 2027-03-29), la validazione con Ergon e la consegna. La milestone RTB è prevista alla fine di S6 (2027-01-31) e la PB alla fine di S10 (2027-04-02); le date delle revisioni saranno concordate con i docenti.
 
 = Rischi attesi e misure di mitigazione
 
@@ -265,7 +265,7 @@ I rischi sono divisi in tre gruppi: tecnologici, legati ai requisiti e organizza
     (
       [Capitolato], [C7 – SmartDashboard: piattaforma di Business Intelligence self-service potenziata da AI (Ergon Informatica Srl)],
       [Componenti del gruppo], [6],
-      [Data di consegna], [2027-03-26],
+      [Data di consegna], [2027-04-02],
       [Ore produttive per componente], [90],
       [Ore produttive complessive], [540],
       [Costo complessivo], [11.040,00 €],
@@ -276,7 +276,7 @@ I rischi sono divisi in tre gruppi: tecnologici, legati ai requisiti e organizza
   caption: [Impegni assunti dal gruppo],
 ) <tab-impegni>
 
-*Data di consegna.* Il gruppo prevede di iniziare il giorno dopo l'aggiudicazione, e si impegna a consegnare entro venerdì 2027-03-26: venti settimane di lavoro, fino a martedì 2027-03-23, più tre giorni lavorativi di margine, compresi nell'ultimo sprint. Se la validazione con Ergon si conclude prima, il gruppo consegna prima.
+*Data di consegna.* Il gruppo prevede di iniziare il giorno dopo l'aggiudicazione, e si impegna a consegnare entro venerdì 2027-04-02. Il calendario parte mercoledì 2026-11-11 e prevede venti settimane di lavoro, fino a martedì 2027-03-30, più tre giorni lavorativi di margine, compresi nell'ultimo sprint. Se la validazione con Ergon si conclude prima, il gruppo consegna prima.
 
 *Monte ore.* Ogni componente dedica al progetto 90 ore produttive, entro il limite massimo di 95 ore fissato dal regolamento, in media circa 4,4 ore a settimana; il gruppo nel complesso 540 ore. Il preventivo riguarda solo il lavoro successivo all'aggiudicazione: le ore spese per la candidatura non sono incluse.
 
