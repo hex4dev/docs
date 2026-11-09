@@ -55,7 +55,7 @@
 
 = Resoconto
 == Candidatura al nuovo capitolato e invio
-Dopo la mancata assegnazione del C7, il gruppo si candida al C9 (SpecCheck, Zucchetti), non considerato in precedenza. La lettera di presentazione richiede solo l'aggiornamento di link e capitolato. L'invio è anticipato a lunedì 2026-11-09, dopo un controllo generale.
+Viene fatto il punto della situazione sui documenti già modificati per il nuovo capitolato C7. La lettera di presentazione richiede solo l'aggiornamento di link e capitolato. L'invio è anticipato a lunedì 2026-11-09, dopo un controllo generale.
 
 == Versionamento e formato delle date
 Si è scelto di portare tutti i documenti alla versione 1.0, senza riscrivere retroattivamente le versioni intermedie 0.x. Il docente richiede le date nel formato AAAA-MM-GG, già adottato nella repository e nel sito.
@@ -70,7 +70,7 @@ I documenti sono verificati prima dell'inserimento nella repo. Ogni responsabile
 #decisioni(
   [In questo ciclo di consegna tutti i documenti di candidatura sono alla versione 1.0; le modifiche minori incrementano la seconda cifra (1.1, 1.2), quelle sostanziali, come un cambio di capitolato, portano a 2.0.#azioni-correlate("A2", "A3", "A4")],
   [Tutte le date nei documenti e nel sito sono in formato AAAA-MM-GG.#azioni-correlate("A1")],
-  [La candidatura al C9 è inviata lunedì 2026-11-09 entro le 17:00, anticipando il termine del 2026-11-10, dopo un controllo generale nella riunione delle 15:00.#azioni-correlate("A4", "A6", "A7", "A9")],
+  [La candidatura al capitolato C7 è prevista per lunedì 2026-11-09 entro le 17:00, anticipando il termine del 2026-11-10, dopo un controllo generale nella riunione delle 15:00.#azioni-correlate("A4", "A6", "A7", "A9")],
   [La data di consegna prevista slitta di una settimana, a venerdì 2027-04-02; la dichiarazione degli impegni indica l'avvio il giorno dopo l'aggiudicazione, senza data.#azioni-correlate("A2")],
   [I ruoli del primo sprint restano quelli stabiliti (VI-2026-11-03-D6).#senza-azioni],
   [Ogni componente aggiorna la propria issue GitHub e la collega alle pull request, così che si chiuda al merge.#azioni-correlate("A8")],
