@@ -17,11 +17,12 @@
   titolo: "Valutazione Capitolati",
   sottotitolo: "Candidatura · Anno accademico 2026/2027",
   numero-gruppo: "14",
-  versione: "1.0",
-  data: "2026/11/06",
-  redattori: ("Francesco Bassani", "Alessandro Ravenna, Matilde Pedrocchi"),
-  verificatori: ("Alessandro Zanier", "Andrea Nogara", "Matteo Angelini"),
+  versione: "2.0",
+  data: "2026/11/09",
+  redattori: ("Francesco Bassani", "Alessandro Ravenna", "Matilde Pedrocchi", "Andrea Nogara"),
+  verificatori: ("Alessandro Zanier", "Andrea Nogara", "Matteo Angelini", "Alessandro Ravenna"),
   registro: (
+    ("2.0", "2026/11/09", "Andrea Nogara", "Alessandro Ravenna", "Riscrittura sezione 'Capitolato selezionato' per il capitolato C9"),
     ("1.0", "2026/11/06", "Matilde Pedrocchi", "Matteo Angelini", "Riscrittura sezione 'Capitolato selezionato' per il capitolato C7, omologazione di tutte le date al formato anno/mese/giorno"),
     ("0.2", "2026/10/27", "Francesco Bassani", "Alessandro Zanier, Andrea Nogara", "Valutazione dei capitolati da C5 a C9"),
     ("0.1", "2026/10/27", "Francesco Bassani", "—", "Creazione dello scheletro del documento"),
@@ -63,7 +64,7 @@ Strumento multimodale basato su intelligenza artificiale che automatizza la gest
 - Non sono specificati costi e accesso ai servizi AI e cloud; il canale «meeting» compare nello schema dell'architettura ma non tra i requisiti, e andrebbe chiarito con il proponente, e l'integrazione con WhatsApp richiede attenzione.
 
 === Valutazione finale
-Capitolato ben documentato e ricco di spunti tecnici, con un proponente strutturato e un buon supporto, ma con un ambito ampio e con incertezze sulle integrazioni da chiarire. Dopo una attenta valutazione il gruppo ha deciso di scartarlo.
+Capitolato ben documentato e ricco di spunti tecnici, con un proponente strutturato e un buon supporto, ma con un ambito ampio e con incertezze sulle integrazioni da chiarire. Il gruppo ha deciso di scartare questo capitolato.
 
 #pagebreak(weak: true)
 == C1 – AURA: AI for Understanding, Reasoning and Automation
@@ -89,7 +90,7 @@ Vimar produce impianti domotici wireless in rete Bluetooth Mesh ed è tra i prom
 - Tre componenti obbligatorie (infrastruttura, MCP server e client, agente AI) e un numero elevato di casi d'uso da gestire; costi di LLM e cloud non quantificati nel capitolato.
 
 === Valutazione finale
-Capitolato concreto e ben strutturato, con hardware reale, requisiti dettagliati e un proponente molto presente, ma con un carico di test elevato e una forte dipendenza da kit e API di Vimar. Per questo motivo il gruppo ha deciso di scartarlo.
+Capitolato concreto e ben strutturato, con hardware reale, requisiti dettagliati e un proponente molto presente, ma con un carico di test elevato e una forte dipendenza da kit e API di Vimar. Il gruppo ha deciso di scartare questo capitolato.
 
 #pagebreak(weak: true)
 == C2 – NEXUM Concierge
@@ -115,7 +116,7 @@ NEXUM è la piattaforma di Eggon per la comunicazione aziendale e i servizi HR, 
 - Molti requisiti trasversali (autorizzazioni, conferme, tracciabilità, elaborazioni asincrone, separazione tra aziende) pur in un dominio ristretto, con consumi e costi dei servizi AI da monitorare come parte della valutazione.
 
 === Valutazione finale
-Capitolato molto chiaro su perimetro, accettazione e rischi, con libertà tecnologica su un tema attuale, ma con soglie di prestazione e integrazioni ancora da concordare e con la difficoltà di dimostrare la correttezza delle risposte. Il gruppo ha deciso di scartare questo capitolto.
+Capitolato molto chiaro su perimetro, accettazione e rischi, con libertà tecnologica su un tema attuale, ma con soglie di prestazione e integrazioni ancora da concordare e con la difficoltà di dimostrare la correttezza delle risposte. Il gruppo ha deciso di scartare questo capitolato.
 
 #pagebreak(weak: true)
 == C3 – FossDot
@@ -141,7 +142,7 @@ Gli smart speaker commerciali sono dispositivi chiusi, legati al cloud del produ
 - Proponente a distanza (Londra e sede di Roma), con comunicazioni via chat, e-mail e videochiamate e incontri in presenza solo se necessari; i flussi vocali sono dati personali (GDPR) e servono costi per provider AI e servizi cloud, con copertura di riferimento di almeno l'80% sul software.
 
 === Valutazione finale
-Capitolato ambizioso e vario dal punto di vista tecnico, con un forte valore di portfolio grazie alla licenza open source, ma con un ambito molto ampio e una componente hardware ed embedded difficile da stimare. Il gruppo ha selezionato questo capitolato come prima scelta.
+Capitolato ambizioso e vario dal punto di vista tecnico, con un forte valore di portfolio grazie alla licenza open source, ma con un ambito molto ampio e una componente hardware ed embedded difficile da stimare. Il gruppo ha deciso di scartare questo capitolato.
 
 #pagebreak(weak: true)
 == C4 – Gestione veicoli e servizi post-vendita
@@ -277,7 +278,7 @@ Capitolato molto curato e con criteri di valutazione chiari, ma vincolato a uno 
 == C9 – SpecCheck
 
 === Informazioni generali
-- *Titolo:* SpecCheck: Skills per OpenCode per la verifica della tracciabilità tra casi d'uso , requisiti e codice sorgente
+- *Titolo:* SpecCheck: Skills per OpenCode per la verifica della tracciabilità tra casi d'uso, requisiti e codice sorgente
 - *Proponente:* Zucchetti S.p.A.
 - *Referente:* Gregorio Piccoli
 
@@ -297,17 +298,16 @@ Pacchetto di skill, tool e almeno un plugin per OpenCode, l'harness per lo svilu
 - Il capitolato non indica cadenza di incontri, supporto o formazione da parte del proponente, né soglie quantitative di accettazione (parla solo di «adeguata copertura»); la qualità della verifica (falsi positivi e negativi) è difficile da misurare.
 
 === Valutazione finale
-Capitolato innovativo e molto pertinente al corso, con un buon accesso ai modelli, ma con un alto grado di incertezza dovuto alla natura esplorativa e alla dipendenza dagli LLM, e con meno indicazioni sul supporto del proponente. Per questi motivi il gruppo non lo ha selezionato.
+Capitolato innovativo e molto pertinente al corso, con un buon accesso ai modelli, ma con un alto grado di incertezza dovuto alla natura esplorativa e alla dipendenza dagli LLM. Il gruppo ha selezionato questo capitolato.
 
 = Capitolato selezionato
 
 == Valutazioni finali
-Tra i capitolati rimanenti dopo la scadenza di candidatura sincrona, il gruppo Hex4dev ha scelto di presentare la candidatura per il capitolato C7 (SmartDashboard: piattaforma di Business 
-Intelligence self-service potenziata da AI), proposto dall'azienda Ergon. 
+Tra i capitolati rimanenti dopo la scadenza di candidatura sincrona, il gruppo Hex4dev ha scelto di presentare la candidatura per il capitolato C9 (SpecCheck: Skills per OpenCode per la verifica della tracciabilità tra casi d'uso, requisiti e codice sorgente), proposto dall'azienda Zucchetti S.p.A. 
 
 È stato preferito questo capitolato rispetto ad altri per queste motivazioni principali:
 
-+ *Disponibilità della proponente*: L'azienda si è resa disponibile a riunioni fisse a cadenza quindicinale, con la possibilità di fissare ulteriori incontri in caso di bisogno. Indica inoltre di essere disponibile a comunicare anche in modalità asincrona (Per ulteriori informazioni è possibile visionare il verbale dell'incontro esplorativo).
-+ *Approccio incrementale*: Struttura di base (Piattaforma BI) da poi espandere con altre funzionalità (Layer di AI), che possono essere più facilmente rinegoziate in caso di bisogno.
-+ *Tecnologie consigliate ma non rigide*: La proponente ha offerto una lista di tecnologie che suggerische di utilizzare, correlate con motivazioni di questi suggerimenti, oltre che di link di approfondimento e sitografia. Queste però sono, appunto, dei suggerimenti e la scelta finale viene lasciata al gruppo.
-+ *Chiara priorità dei requisiti*: Le caratteristiche che la proponente desidera che il prodotto possieda sono chiaramente ordinate per importanza attribuita oppure esplicitamente definite come necessarie, desiderabili o estensioni. È quindi facile capire su quali aspetti concentrarsi e quali invece possono essere implementati in un secondo momento o messi da parte in caso di necessità.
++ *Tema attuale e coerente con il corso*: il capitolato affronta la tracciabilità tra casi d'uso, requisiti e codice, un problema centrale dell'ingegneria del software che diventa ancora più rilevante ora che la scrittura del codice è sempre più automatizzata. Permette inoltre di acquisire competenze molto aggiornate su agenti, skill, plugin e gestione del contesto per LLM.
++ *Accesso ai modelli e pubblicazione open source*: l'azienda mette a disposizione sia modelli di grandi dimensioni, con un tetto di costo, sia modelli più piccoli senza limiti di utilizzo, così da poter sperimentare senza preoccupazioni di budget. Ha inoltre indicato un titolo preferenziale per la pubblicazione open source del risultato.
++ *Requisiti obbligatori chiari e in numero contenuto*: i requisiti obbligatori sono nove e ben definiti, quindi il perimetro minimo del progetto è facile da comprendere e da pianificare.
++ *Percorso a fasi e flessibilità sugli opzionali*: le fasi di PoC e MVP sono ben distinte, e i requisiti opzionali (dashboard grafica, verifica della copertura delle specifiche, lettura da PDF) possono essere modificati dai gruppi vincitori. Il gruppo può quindi adattare l'ambizione del progetto alle proprie capacità.
