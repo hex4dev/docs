@@ -11,50 +11,67 @@
 
 #import "/templates/documento.typ": documento, tabella, todo
 
+//Nasconde il titolo "Indice" generato dal template
+#show heading: it => {
+  if it.body == [Indice] {
+    // Non restituisce nulla, saltando l'intestazione
+  } else {
+    it
+  }
+}
+//Rimuove completamente l'indice generato da outline
+#show outline: _ => none
+
 #show: documento.with(
   titolo: "Lettera di Presentazione",
   sottotitolo: "Candidatura · Anno accademico 2026/2027",
   numero-gruppo: "14",
-  versione: "0.2",
-  data: "28/10/2026",
-  redattori: ("Matteo Angelini", "Francesco Bassani"),
+  versione: "2.0",
+  data: "2026/11/09",
+  redattori: ("Matteo Angelini", "Francesco Bassani", "Matilde Pedrocchi"),
+  verificatori: ("Matteo Angelini", "Alessandro Zanier"),
   registro: (
-    ("0.1", "28/10/2026", "Matteo Angelini", "—", "Creazione dello scheletro del documento"),
-	("0.2", "29/10/2026", "Francesco Bassani", "—", "Completamento lettera "),
+    ("2.0", "2026/11/09", "Matilde Pedrocchi", "Alessandro Zanier", "Riscrittura per il capitolato C9"),
+    ("1.0", "2026/11/07", "Matilde Pedrocchi", "Matteo Angelini", "Riscrittura per il capitolato C7, date modificate per essere nel formato anno/mese/giorno, link aggiornati e resi esteticamente più gradevoli, aggiunti destinatari, tolto indice vuoto"),
+    ("0.2", "2026/10/29", "Francesco Bassani", "—", "Completamento lettera "),
+    ("0.1", "2026/10/28", "Matteo Angelini", "—", "Creazione dello scheletro del documento"),
+	
   ),
 )
+
+#heading(level: 1, numbering: none)[Candidatura]
+
+Al Prof. Tullio Vardanega e al Prof. Riccardo Cardin \
+Dipartimento di Matematica “Tullio Levi-Civita”, Università degli Studi di Padova
 
 Con la presente, il gruppo Hex4dev intende comunicarVi la volontà di
 candidarsi e impegnarsi nello sviluppo e realizzazione del capitolato
 denominato:
 
-C3 - Fossdot: Smart Speaker Open Source estensibile e rispettoso della privacy
+*C9 - SpecCheck: Sviluppo di Skills per OpenCode per la verifica della tracciabilità end to-end da casi d'uso a requisiti e codice sorgente*
 
-proposto dall'azienda Uranion EMEA LTD. 
+proposto dall'azienda Zucchetti SPA. 
 
-La repository della documentazione relativa alla candidatura è disponibile al seguente link:
-
-https://github.com/hex4dev/docs/
-
-https://hex4dev.github.io/docs/
+La repository della documentazione relativa alla candidatura è disponibile ai seguenti link:
+- #link("https://github.com/hex4dev/docs/")[Repository del gruppo]
+- #link("https://hex4dev.github.io/docs/")[Vista web] della repository
 
 I documenti forniti sono:
-
-- Analisi e Valutazione dei capitolati https://github.com/hex4dev/docs/blob/main/candidatura/valutazione-capitolati/valutazione-capitolati.typ;
-
-- Preventivo dei costi e assunzione di impegni https://github.com/hex4dev/docs/blob/main/dichiarazione-impegni/dichiarazione-impegni.typ;
-
+- #link("https://hex4dev.github.io/docs/pdf/candidatura/valutazione-capitolati/valutazione-capitolati.pdf")[Valutazione capitolati]
+- #link("https://hex4dev.github.io/docs/pdf/candidatura/dichiarazione-impegni/dichiarazione-impegni.pdf")[Dichiarazione degli impegni]
 - Verbali degli incontri esterni con le aziende:
-	- 21-10-2026 https://github.com/hex4dev/docs/blob/main/candidatura/verbali/esterni/2026-10-21/verbale-esterno.typ;
-	- 28-10-2026 https://github.com/hex4dev/docs/blob/main/candidatura/verbali/esterni/2026-10-28/verbale-esterno.typ;
-
+	- #link("https://hex4dev.github.io/docs/pdf/candidatura/verbali/esterni/2026-10-28/verbale-esterno.pdf")[2026/10/28]
+ - #link("https://hex4dev.github.io/docs/pdf/candidatura/verbali/esterni/2026-10-21/verbale-esterno.pdf")[2026/10/21]
 - Verbali degli incontri interni:
-	- 26-10-2026 https://github.com/hex4dev/docs/blob/main/candidatura/verbali/interni/2026-10-26/verbale-interno.typ;
-	- 28-10-2026 https://github.com/hex4dev/docs/blob/main/candidatura/verbali/interni/2026-10-28/verbale-interno.typ;
+ - #link("https://hex4dev.github.io/docs/pdf/candidatura/verbali/interni/2026-11-09/verbale-interno.pdf")[2026/11/09]
+ - #link("https://hex4dev.github.io/docs/pdf/candidatura/verbali/interni/2026-11-06/verbale-interno.pdf")[2026/11/06]
+ - #link("https://hex4dev.github.io/docs/pdf/candidatura/verbali/interni/2026-11-03/verbale-interno.pdf")[2026/11/03] 
+ - #link("https://hex4dev.github.io/docs/pdf/candidatura/verbali/interni/2026-11-02/verbale-interno.pdf")[2026/11/02]
+ - #link("https://hex4dev.github.io/docs/pdf/candidatura/verbali/interni/2026-10-29/verbale-interno.pdf")[2026/10/29]
+	- #link("https://hex4dev.github.io/docs/pdf/candidatura/verbali/interni/2026-10-28/verbale-interno.pdf")[2026/10/28]
+	- #link("https://hex4dev.github.io/docs/pdf/candidatura/verbali/interni/2026-10-26/verbale-interno.pdf")[2026/10/26]
 
-All’interno del documento dedicato, è preventivato il costo stimato alla
-realizzazione del prodotto, valore individuato a 11040 € con data di
-consegna prevista entro il 27-03-2027. 
+All’interno del documento dedicato, è preventivato il costo stimato alla realizzazione del prodotto, valore individuato a 11.040,00 €, con data di consegna prevista entro il 2027/04/02. 
 
 Cordiali Saluti,\
 Hex4dev - Gruppo 14
