@@ -1,16 +1,21 @@
 {
-  "defaultSection": "candidatura",
-  "pinnedCategories": [
-    "Dichiarazione impegni",
-    "Valutazione capitolati"
-  ],
+  "defaultSection": "rtb",
+  "pinnedCategories": {
+    "candidatura": ["Dichiarazione impegni", "Valutazione capitolati"],
+    "rtb": []
+  },
+  "pinnedDocuments": {
+    "candidatura": ["lettera-di-presentazione"],
+    "rtb": []
+  },
   "sections": [
-    { "id": "candidatura", "title": "Candidatura" }
+    { "id": "candidatura", "title": "Candidatura" },
+    { "id": "rtb", "title": "RTB"}
   ],
   "rules": [
     {
-      "root": "candidatura",
-      "match": "^candidatura/diario-di-bordo/(?<date>\\d{4}-\\d{2}-\\d{2})/diario-di-bordo\\.typ$",
+      "root": "common",
+      "match": "^common/diari-di-bordo/(?<date>\\d{4}-\\d{2}-\\d{2})/diario-di-bordo\\.typ$",
       "section": "candidatura",
       "category": "Diario di bordo",
       "titleTemplate": "Diario di bordo — {date}",
@@ -39,7 +44,6 @@
       "category": "Lettera di presentazione",
       "title": "Lettera di presentazione",
       "id": "lettera-di-presentazione",
-      "placement": "above-archive",
       "readVersion": true
     },
     {

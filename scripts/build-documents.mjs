@@ -110,7 +110,19 @@ function build() {
   }
   if (!sectionIds.has(config.defaultSection)) throw new Error(`Sezione predefinita non definita: ${config.defaultSection}`);
   for (const rule of config.rules) if (!sectionIds.has(rule.section)) throw new Error(`Sezione non definita nella regola: ${rule.section}`);
+  for (const field of ['pinnedCategories', 'pinnedDocuments']) {
+    for (const section of Object.keys(config[field] ?? {})) {
+      if (!sectionIds.has(section) || !Array.isArray(config[field][section])) throw new Error(`Configurazione ${field} non valida per la sezione: ${section}`);
+    }
+  }
   const documents = discover(config);
+  for (const [section, ids] of Object.entries(config.pinnedDocuments ?? {})) {
+    for (const id of ids) {
+      const document = documents.find((candidate) => candidate.id === id && candidate.section === section);
+      if (!document) throw new Error(`Documento pinnato ${id} non trovato nella sezione ${section}`);
+      document.placement = 'above-archive';
+    }
+  }
   clean();
   if (!documents.length) throw new Error('Nessun documento corrisponde alle regole di pubblicazione.');
   for (const document of documents) {
@@ -142,7 +154,8 @@ function build() {
   writeFileSync(sectionsFile, `${JSON.stringify({
     defaultSection: config.defaultSection,
     sections: config.sections,
-    pinnedCategories: config.pinnedCategories ?? [],
+    pinnedCategories: config.pinnedCategories ?? {},
+    pinnedDocuments: config.pinnedDocuments ?? {},
   }, null, 2)}\n`);
   console.log(`${catalog.length === 1 ? 'Generato 1 documento' : `Generati ${catalog.length} documenti`}.`);
 }
