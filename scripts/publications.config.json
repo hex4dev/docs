@@ -63,6 +63,22 @@
       "title": "Dichiarazione degli impegni",
       "id": "dichiarazione-impegni",
       "readVersion": true
+    },
+    {
+      "root": "rtb",
+      "match": "^rtb/verbali/esterni/(?<date>\\d{4}-\\d{2}-\\d{2})/verbale-esterno\\.typ$",
+      "section": "rtb",
+      "category": "Verbali esterni",
+      "titleTemplate": "Verbale esterno — {date}",
+      "idTemplate": "verbale-esterno-{date}"
+    },
+    {
+      "root": "rtb",
+      "match": "^rtb/verbali/interni/(?<date>\\d{4}-\\d{2}-\\d{2})/verbale-interno\\.typ$",
+      "section": "rtb",
+      "category": "Verbali interni",
+      "titleTemplate": "Verbale interno — {date}",
+      "idTemplate": "verbale-interno-{date}"
     }
   ],
   "overrides": {}
