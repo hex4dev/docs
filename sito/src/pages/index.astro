@@ -2,7 +2,7 @@
 import documents from '../data/generated-documents.json';
 import sectionConfig from '../data/generated-sections.json';
 import teamMembers from '../data/team-members.json';
-import { siteUrl, sourceUrl } from '../utils/urls.js';
+import { siteUrl } from '../utils/urls.js';
 import '../styles/global.css';
 
 const categories = [...new Set(documents.map((document) => document.category))].sort((a, b) => {
@@ -95,7 +95,6 @@ const dateLabel = (date) => date ? date.replaceAll('-', '/') : '';
             <div class="document-title-line"><h2>{document.title}</h2>{document.version && <span class="version-badge">v{document.version}</span>}</div>
             <div class="document-actions" aria-label={`Azioni per ${document.title}`}>
               <a class="action-link action-primary" href={siteUrl(document.pdfPath)} target="_blank" rel="noopener noreferrer">Apri</a>
-              <a class="action-link" href={sourceUrl(document.sourcePath)} target="_blank" rel="noopener noreferrer" aria-label={`Sorgente Typst su GitHub: ${document.title}`}>Sorgente</a>
             </div>
           </article>
         ))}
@@ -112,7 +111,6 @@ const dateLabel = (date) => date ? date.replaceAll('-', '/') : '';
                   </div>
                   <div class="document-actions" aria-label={`Azioni per ${document.title}`}>
                     <a class="action-link action-primary" href={siteUrl(document.pdfPath)} target="_blank" rel="noopener noreferrer">Apri</a>
-                    <a class="action-link" href={sourceUrl(document.sourcePath)} target="_blank" rel="noopener noreferrer" aria-label={`Sorgente Typst su GitHub: ${document.title}`}>Sorgente</a>
                   </div>
                 </article>
               ))}
