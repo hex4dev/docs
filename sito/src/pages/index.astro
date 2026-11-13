@@ -2,25 +2,33 @@
 import documents from '../data/generated-documents.json';
 import sectionConfig from '../data/generated-sections.json';
 import teamMembers from '../data/team-members.json';
-import { siteUrl, sourceUrl } from '../utils/urls.js';
+import { siteUrl } from '../utils/urls.js';
 import '../styles/global.css';
 
-const categories = [...new Set(documents.map((document) => document.category))].sort((a, b) => {
-  const aPinned = sectionConfig.pinnedCategories.indexOf(a);
-  const bPinned = sectionConfig.pinnedCategories.indexOf(b);
-  if (aPinned !== -1 || bPinned !== -1) {
-    if (aPinned === -1) return 1;
-    if (bPinned === -1) return -1;
-    return aPinned - bPinned;
-  }
-  return a.localeCompare(b, 'it');
+const homepageDocuments = documents.filter((document) => document.category !== 'Diario di bordo');
+const categories = [...new Set(homepageDocuments.map((document) => document.category))];
+const featuredDocuments = homepageDocuments.filter((document) => document.placement === 'above-archive');
+const archiveDocuments = homepageDocuments.filter((document) => document.placement !== 'above-archive');
+const initialDocumentCount = homepageDocuments.filter((document) => document.section === sectionConfig.defaultSection).length;
+const categoryGroups = sectionConfig.sections.flatMap((section) => {
+  const sectionCategories = categories.filter((category) => archiveDocuments.some((document) => document.section === section.id && document.category === category));
+  const pinned = sectionConfig.pinnedCategories[section.id] ?? [];
+  sectionCategories.sort((a, b) => {
+    const aPinned = pinned.indexOf(a);
+    const bPinned = pinned.indexOf(b);
+    if (aPinned !== -1 || bPinned !== -1) {
+      if (aPinned === -1) return 1;
+      if (bPinned === -1) return -1;
+      return aPinned - bPinned;
+    }
+    return a.localeCompare(b, 'it');
+  });
+  return sectionCategories.map((category) => ({
+    section: section.id,
+    category,
+    documents: archiveDocuments.filter((document) => document.section === section.id && document.category === category),
+  }));
 });
-const featuredDocuments = documents.filter((document) => document.placement === 'above-archive');
-const archiveDocuments = documents.filter((document) => document.placement !== 'above-archive');
-const categoryGroups = categories.map((category) => ({
-  category,
-  documents: archiveDocuments.filter((document) => document.category === category),
-})).filter((group) => group.documents.length);
 const dateLabel = (date) => date ? date.replaceAll('-', '/') : '';
 ---
 
@@ -32,6 +40,7 @@ const dateLabel = (date) => date ? date.replaceAll('-', '/') : '';
     <meta name="description" content="Documentazione del gruppo 14 — hex4dev." />
     <meta name="theme-color" content="#554AB6" />
     <title>Documentazione | hex4dev</title>
+    <style>[hidden] { display: none !important; }</style>
   </head>
   <body>
     <header class="site-header">
@@ -79,7 +88,7 @@ const dateLabel = (date) => date ? date.replaceAll('-', '/') : '';
       <section class="archive" aria-labelledby="archive-title">
         <div class="archive-heading">
           <h2 id="archive-title">Documenti</h2>
-          <span class="document-count" aria-live="polite"><span id="result-count">{documents.length}</span> {documents.length === 1 ? 'documento' : 'documenti'}</span>
+          <span class="document-count" aria-live="polite"><span id="result-count">{initialDocumentCount}</span> {initialDocumentCount === 1 ? 'documento' : 'documenti'}</span>
         </div>
 
         <div class="controls">
@@ -91,28 +100,26 @@ const dateLabel = (date) => date ? date.replaceAll('-', '/') : '';
         </div>
 
         {featuredDocuments.map((document) => (
-          <article class="featured-document" data-document data-section={document.section} data-category={document.category} data-search={`${document.title} ${document.category} ${document.type} ${document.date ?? ''} ${dateLabel(document.date)}`.toLocaleLowerCase('it-IT')}>
+          <article class="featured-document" data-document data-section={document.section} data-category={document.category} data-search={`${document.title} ${document.category} ${document.type} ${document.date ?? ''} ${dateLabel(document.date)}`.toLocaleLowerCase('it-IT')} hidden={document.section !== sectionConfig.defaultSection}>
             <div class="document-title-line"><h2>{document.title}</h2>{document.version && <span class="version-badge">v{document.version}</span>}</div>
             <div class="document-actions" aria-label={`Azioni per ${document.title}`}>
               <a class="action-link action-primary" href={siteUrl(document.pdfPath)} target="_blank" rel="noopener noreferrer">Apri</a>
-              <a class="action-link" href={sourceUrl(document.sourcePath)} target="_blank" rel="noopener noreferrer" aria-label={`Sorgente Typst su GitHub: ${document.title}`}>Sorgente</a>
             </div>
           </article>
         ))}
 
         <div class="document-list" id="document-list">
-          {categoryGroups.map(({ category, documents: categoryDocuments }) => (
-            <section class="category-group" data-category-group={category} aria-label={category}>
+          {categoryGroups.map(({ section, category, documents: categoryDocuments }) => (
+            <section class="category-group" data-category-group={category} aria-label={category} hidden={section !== sectionConfig.defaultSection}>
               <h3>{category}</h3>
               {categoryDocuments.map((document) => (
-                <article class="document-row" data-document data-section={document.section} data-category={document.category} data-search={`${document.title} ${document.category} ${document.type} ${document.date ?? ''} ${dateLabel(document.date)}`.toLocaleLowerCase('it-IT')}>
+                <article class="document-row" data-document data-section={document.section} data-category={document.category} data-search={`${document.title} ${document.category} ${document.type} ${document.date ?? ''} ${dateLabel(document.date)}`.toLocaleLowerCase('it-IT')} hidden={document.section !== sectionConfig.defaultSection}>
                   <div class="document-main">
                     <div class="document-title-line"><h4>{document.title}</h4>{document.version && <span class="version-badge">v{document.version}</span>}</div>
                     {document.date && <p class="document-meta"><time datetime={document.date}>{dateLabel(document.date)}</time></p>}
                   </div>
                   <div class="document-actions" aria-label={`Azioni per ${document.title}`}>
                     <a class="action-link action-primary" href={siteUrl(document.pdfPath)} target="_blank" rel="noopener noreferrer">Apri</a>
-                    <a class="action-link" href={sourceUrl(document.sourcePath)} target="_blank" rel="noopener noreferrer" aria-label={`Sorgente Typst su GitHub: ${document.title}`}>Sorgente</a>
                   </div>
                 </article>
               ))}
@@ -122,11 +129,13 @@ const dateLabel = (date) => date ? date.replaceAll('-', '/') : '';
 
         <p class="empty-state" id="empty-state" hidden>Nessun documento trovato.</p>
       </section>
+
     </main>
 
     <footer class="site-footer">
       <div class="footer-inner">
         <span>hex4dev · Gruppo 14</span>
+        <a href={siteUrl('diari-di-bordo/')}>Diari di bordo</a>
       </div>
     </footer>
   </body>
@@ -169,4 +178,5 @@ const dateLabel = (date) => date ? date.replaceAll('-', '/') : '';
   }
 
   input.addEventListener('input', filterDocuments);
+  filterDocuments();
 </script>

@@ -9,6 +9,3 @@ export function siteUrl(path, base = import.meta.env.BASE_URL) {
   return `${normalizeBase(base)}${relative ? encodePath(relative) : ''}`;
 }
 
-export function sourceUrl(path) {
-  return `https://github.com/hex4dev/docs/blob/main/${encodePath(path)}`;
-}
