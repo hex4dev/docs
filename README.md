@@ -39,14 +39,14 @@ Per aggiungere un nuovo diario di bordo, verbale o altro documento già coperto 
 1. Crea il sorgente nel percorso e con il nome attesi dalla regola. Un esempio di formato corrente supportato è
 
    ```text
-   candidatura/diario-di-bordo/YYYY-MM-DD/diario-di-bordo.typ
+   common/diari-di-bordo/YYYY-MM-DD/diario-di-bordo.typ
    ```
 
    Per i documenti datati (come in esempio), usa la data effettiva nel formato `YYYY-MM-DD`.
 
 2. Scrivi il documento importando il template adatto da `templates/`. I template includono intestazione, stile e componenti comuni. Nei loro commenti iniziali sono riportati parametri, esempi d'uso e comando di compilazione. Gli import devono essere nella forma `/templates/verbale-interno.typ` e si risolvono dalla root del repository.
 
-3. Esegui la build del sito (vedi [Build locale](#build-locale)). Lo script compila il `.typ` con Typst, mette il PDF in `sito/public/pdf/` e aggiorna il catalogo usato dalla pagina. I documenti datati vengono ordinati per data, dal più recente.
+3. Esegui la build del sito (vedi [Build locale](#build-locale)). Lo script compila il `.typ` con Typst, mette il PDF in `sito/public/pdf/` e aggiorna il catalogo usato dal sito. I diari sono raccolti nella pagina dedicata; i documenti datati vengono ordinati per data, dal più recente.
 
 Il PDF accanto al sorgente, con lo stesso nome (per esempio `diario-di-bordo.pdf`), è facoltativo. Se esiste, la build lo copia al posto di compilare il Typst; altrimenti compila il `.typ`. Si consiglia questa opzione per pubblicare documenti firmati dai soggetti interessati.
 
@@ -69,7 +69,7 @@ Il gruppo nominato `date` viene usato per validare e mostrare la data. I templat
 
 Per una nuova sezione, aggiungi una voce a `sections` e, se necessario, aggiorna `defaultSection`; le sezioni devono avere `id` distinti. Per correggere i metadati o nascondere un singolo file senza cambiare la regola generale, usa `overrides` con il percorso sorgente come chiave. Campi supportati includono `title`, `category`, `section`, `date`, `type`, `placement`, `order`, `readVersion` e `visible` (`false` esclude il documento). `placement: "above-archive"` mostra il documento in evidenza prima dell'archivio. `readVersion: true` legge la versione dal PDF, se il template la registra come parola chiave `version=...`.
 
-Le categorie in `pinnedCategories` vengono mostrate prima delle altre. Se una regola non corrisponde a nessun file, il file `.typ` non comparirà nel sito.
+Le categorie in `pinnedCategories` vengono mostrate prima delle altre nella sezione indicata, ad esempio `"pinnedCategories": { "candidatura": ["Verbali interni"], "rtb": [] }`. I documenti in `pinnedDocuments` sono indicati per sezione tramite ID e vengono mostrati in evidenza sopra l'archivio, ad esempio `"pinnedDocuments": { "candidatura": ["lettera-di-presentazione"], "rtb": [] }`. Se una regola non corrisponde a nessun file, il file `.typ` non comparirà nel sito.
 
 ## File statici e risorse Typst
 

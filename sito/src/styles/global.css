@@ -16,6 +16,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 
 body {
   min-width: 320px;
@@ -195,6 +196,7 @@ main { padding-top: 40px; }
 .document-main h3, .document-main h4 { margin: 0 0 6px; font-size: 1rem; line-height: 1.4; font-weight: 600; }
 .document-title-line { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; }
 .document-title-line h2, .document-title-line h4 { margin: 0; }
+.document-title-line .diary-title { font-size: 1rem; line-height: 1.4; font-weight: 600; }
 .version-badge { display: inline-flex; align-items: center; min-height: 22px; padding: 1px 7px; border: 1px solid var(--outline); border-radius: 5px; color: var(--on-surface-muted); background: var(--surface); font-size: .72rem; font-weight: 600; line-height: 1.2; }
 .document-meta { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; color: var(--on-surface-muted); font-size: 0.84rem; }
 .document-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
