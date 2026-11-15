@@ -71,7 +71,7 @@ Il nome del gruppo è scritto con l'iniziale maiuscola e le date con il trattino
   [L'email a Zucchetti propone la disponibilità nel pomeriggio, senza vincoli rigidi, e lascia all'azienda la scelta dell'orario.#azioni-correlate("A1")],
   [Dal sito sono rimossi i diari di bordo e i link ai sorgenti; restano i link ai PDF.#azioni-correlate("A2")],
   [I documenti successivi alla candidatura sono pubblicati in una sezione Analisi, parallela a Candidatura; le Norme di progetto hanno una cartella dedicata.#azioni-correlate("A2", "A3")],
-  [Le Norme di progetto, che includono il way of working, la nomenclatura dei branch e le regole di versionamento, sono pianificate dal responsabile e poi riviste dall'intero gruppo.#azioni-correlate("A3")],
+  [Le Norme di progetto, che includono il way of working, la nomenclatura dei branch e le regole di versionamento, sono pianificate dall'amministratore e poi riviste dall'intero gruppo.#azioni-correlate("A3")],
   [L'analisi dei requisiti sul C9 parte da una bozza interna, da integrare con le informazioni di Zucchetti.#azioni-correlate("A4")],
   [Il Glossario è un documento separato, inizialmente una struttura vuota aggiornata durante il progetto.#azioni-correlate("A5")],
   [Alla prima pubblicazione nella repo, ogni documento riporta in "approvazione a rilascio" il Responsabile dello sprint.#senza-azioni],
