@@ -1,0 +1,128 @@
+name: Typst PR preview
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  contents: read
+  pull-requests: write
+  actions: read
+
+concurrency:
+  group: typst-preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  changes:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.files.outputs.matrix }}
+      has_files: ${{ steps.files.outputs.has_files }}
+    steps:
+      - name: Find changed Typst documents
+        id: files
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              ...context.repo, pull_number: context.issue.number, per_page: 100,
+            });
+            const paths = files.filter(file => file.status !== 'removed'
+              && file.filename.endsWith('.typ') && !file.filename.startsWith('templates/'))
+              .map(file => file.filename);
+            core.setOutput('matrix', JSON.stringify(paths.map(file => ({ file }))));
+            core.setOutput('has_files', String(paths.length > 0));
+
+  preview:
+    needs: changes
+    if: github.event.pull_request.head.repo.full_name == github.repository && needs.changes.result == 'success' && needs.changes.outputs.has_files == 'true'
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.changes.outputs.matrix) }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout pull request
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Install Typst
+        uses: typst-community/setup-typst@v5
+        with:
+          typst-version: 0.15.1
+
+      - name: Compile document
+        id: compile
+        continue-on-error: true
+        env:
+          FILE: ${{ matrix.file }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/typst-preview"
+          hash="$(printf '%s' "$FILE" | sha256sum | cut -c1-12)"
+          base="$(basename "${FILE%.typ}.pdf" | sed 's/[^A-Za-z0-9_.-]/_/g')"
+          output="$RUNNER_TEMP/typst-preview/${hash}-${base}"
+          echo "path=$output" >> "$GITHUB_OUTPUT"
+          typst compile --root . "$FILE" "$output"
+
+      - name: Upload PDF without archive
+        if: steps.compile.outcome == 'success'
+        uses: actions/upload-artifact@v7
+        with:
+          path: ${{ steps.compile.outputs.path }}
+          archive: false
+          retention-days: 7
+
+  comment:
+    needs: [changes, preview]
+    if: always() && needs.changes.result == 'success' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update PR comment
+        uses: actions/github-script@v9
+        env:
+          HAS_FILES: ${{ needs.changes.outputs.has_files }}
+        with:
+          script: |
+            const marker = '<!-- typst-pr-preview -->';
+            const { owner, repo } = context.repo;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner, repo, issue_number: context.issue.number, per_page: 100,
+            });
+            const existing = comments.find(comment => comment.body?.includes(marker));
+            if (process.env.HAS_FILES !== 'true') {
+              if (existing) await github.rest.issues.deleteComment({ owner, repo, comment_id: existing.id });
+              return;
+            }
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              owner, repo, pull_number: context.issue.number, per_page: 100,
+            });
+            const changed = files.filter(file => file.status !== 'removed'
+              && file.filename.endsWith('.typ') && !file.filename.startsWith('templates/'));
+            const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+              owner, repo, run_id: context.runId, per_page: 100,
+            });
+            const crypto = require('crypto');
+            const artifactNameFor = filename => {
+              const base = filename.split('/').pop()
+                .replace(/\.typ$/, '.pdf')
+                .replace(/[^A-Za-z0-9_.-]/g, '_');
+              const hash = crypto.createHash('sha256')
+                .update(filename)
+                .digest('hex')
+                .slice(0, 12);
+              return `${hash}-${base}`;
+            };
+            const byName = new Map(artifacts.map(artifact => [artifact.name, artifact]));
+            const logs = `https://github.com/${owner}/${repo}/actions/runs/${context.runId}`;
+            const links = changed.map(file => {
+              const artifact = byName.get(artifactNameFor(file.filename));
+              return artifact
+                ? `- ${file.filename} [Download](https://github.com/${owner}/${repo}/actions/runs/${context.runId}/artifacts/${artifact.id})`
+                : `- ${file.filename} [Compilazione o upload fallito](${logs})`;
+            });
+            const body = `${marker}\nPreview dei cambiamenti:\n\n${links.join('\n')}`;
+            if (existing) await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body });
+            else await github.rest.issues.createComment({ owner, repo, issue_number: context.issue.number, body });
