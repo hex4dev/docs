@@ -1,0 +1,150 @@
+name: Approve document release
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  pull-requests: read
+
+concurrency:
+  group: release-approval-${{ github.event.issue.number }}
+  queue: max
+  cancel-in-progress: false
+
+jobs:
+  approve:
+    if: github.event.issue.pull_request && startsWith(github.event.comment.body, '/approva-rilascio')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update approved document
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const issueNumber = context.issue.number;
+            const body = context.payload.comment.body.trim();
+            const match = body.match(/^\/approva-rilascio(?:\s+(.+))?$/);
+            if (!match) throw new Error('Formato comando non valido. Usa `/approva-rilascio [percorso/file.typ]`.');
+
+            const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: issueNumber });
+            if (pr.state !== 'open') throw new Error('La pull request deve essere aperta.');
+            if (pr.draft) throw new Error('La pull request è ancora in bozza.');
+            if (pr.head.repo?.full_name !== `${owner}/${repo}`) throw new Error('Le pull request da fork non sono supportate.');
+            const headSha = pr.head.sha;
+            const branch = pr.head.ref;
+
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              owner, repo, pull_number: issueNumber, per_page: 100,
+            });
+            const changedTypst = files
+              .filter(file => file.status !== 'removed' && file.filename.endsWith('.typ'))
+              .map(file => file.filename);
+            let filePath = match[1]?.trim();
+            if (filePath) {
+              if (!changedTypst.includes(filePath)) throw new Error('Il percorso deve essere un file .typ modificato e presente nella PR.');
+            } else {
+              if (changedTypst.length !== 1) throw new Error(`Trovati ${changedTypst.length} file .typ modificati; specificare il percorso nel comando.`);
+              filePath = changedTypst[0];
+            }
+
+            const releaseMarker = `release-approval: pr=${issueNumber} path=${encodeURIComponent(filePath)}`;
+            const prCommits = await github.paginate(github.rest.pulls.listCommits, {
+              owner, repo, pull_number: issueNumber, per_page: 100,
+            });
+            if (prCommits.some(item => item.commit.message.includes(releaseMarker))) {
+              core.info(`Il documento ${filePath} è già stato rilasciato in questa PR; nessuna modifica.`);
+              return;
+            }
+
+            const reviews = await github.paginate(github.rest.pulls.listReviews, {
+              owner, repo, pull_number: issueNumber, per_page: 100,
+            });
+            const latestReviewByUser = new Map();
+            for (const review of reviews) {
+              if (review.state === 'PENDING' || !review.user?.login) continue;
+              latestReviewByUser.set(review.user.login.toLowerCase(), review);
+            }
+            const commenter = context.payload.comment.user.login.toLowerCase();
+            const hasCurrentApproval = [...latestReviewByUser.entries()].some(([login, review]) =>
+              login !== commenter
+              && review.state === 'APPROVED'
+              && review.commit_id === headSha);
+            if (!hasCurrentApproval) throw new Error('Serve una review APPROVED aggiornata all’HEAD corrente da parte di un utente diverso dal Responsabile.');
+
+            try {
+              const decision = await github.graphql(
+                `query($owner: String!, $repo: String!, $number: Int!) {
+                  repository(owner: $owner, name: $repo) {
+                    pullRequest(number: $number) { reviewDecision }
+                  }
+                }`,
+                { owner, repo, number: issueNumber },
+              );
+              const reviewDecision = decision.repository?.pullRequest?.reviewDecision;
+              if (reviewDecision === 'CHANGES_REQUESTED' || reviewDecision === 'REVIEW_REQUIRED') {
+                throw new Error(`La decisione complessiva delle review è ${reviewDecision}.`);
+              }
+            } catch (error) {
+              if (error.message.startsWith('La decisione complessiva')) throw error;
+              core.warning(`Decisione complessiva delle review non disponibile via GraphQL: ${error.message}`);
+            }
+
+            const { data: teamFile } = await github.rest.repos.getContent({ owner, repo, path: 'sito/src/data/team-members.json', ref: pr.base.sha });
+            const team = JSON.parse(Buffer.from(teamFile.content, 'base64').toString('utf8'));
+            const responsible = team.find(member => member.github?.toLowerCase() === commenter);
+            if (typeof responsible?.name !== 'string' || responsible.name.trim().split(/\s+/).length < 2 || /\p{Cc}/u.test(responsible.name)) {
+              throw new Error('Nome completo non trovato in sito/src/data/team-members.json per questo username GitHub.');
+            }
+
+            const ref = await github.rest.git.getRef({ owner, repo, ref: `heads/${branch}` });
+            if (ref.data.object.sha !== headSha) throw new Error('La PR è avanzata durante l’operazione; riprova sul nuovo HEAD.');
+            const commit = await github.rest.git.getCommit({ owner, repo, commit_sha: headSha });
+            const sourceTree = await github.rest.git.getTree({ owner, repo, tree_sha: commit.data.tree.sha, recursive: 'true' });
+            const fileEntry = sourceTree.data.tree.find(entry => entry.path === filePath);
+            if (!fileEntry || fileEntry.type !== 'blob' || !['100644', '100755'].includes(fileEntry.mode)) {
+              throw new Error('Il percorso selezionato non è un file regolare nel commit della PR.');
+            }
+            const sourceBlob = await github.rest.git.getBlob({ owner, repo, file_sha: fileEntry.sha });
+            if (!sourceBlob.data.content) throw new Error(`Impossibile leggere ${filePath}.`);
+            let source = Buffer.from(sourceBlob.data.content, sourceBlob.data.encoding).toString('utf8');
+
+            const versionPattern = /(\bversione\s*:\s*")([0-9]+)\.([0-9]+)(")/g;
+            const versions = [...source.matchAll(versionPattern)];
+            if (versions.length !== 1) throw new Error('Il file deve contenere una sola versione in formato X.Y.');
+            const oldVersion = `${versions[0][2]}.${versions[0][3]}`;
+            const nextVersion = `${Number(versions[0][2]) + 1}.0`;
+            source = source.replace(versionPattern, (_, before, major, minor, after) => `${before}${Number(major) + 1}.0${after}`);
+
+            const registerPattern = /(\bregistro\s*:\s*\()(\s*\n)/;
+            const registerMatches = [...source.matchAll(new RegExp(registerPattern.source, 'g'))];
+            if (registerMatches.length !== 1) throw new Error('Impossibile individuare un unico registro delle modifiche.');
+            const registerStart = registerMatches[0].index + registerMatches[0][0].length;
+            const registerText = source.slice(registerStart);
+            const dateFormat = /"\d{4}\/\d{2}\/\d{2}"/.test(registerText) ? 'slash' : 'dash';
+            const today = new Date().toISOString().slice(0, 10);
+            const date = dateFormat === 'slash' ? today.replaceAll('-', '/') : today;
+            const escapedName = responsible.name.replaceAll('\\', '\\\\').replaceAll('"', '\\"');
+            const row = `    ("${nextVersion}", "${date}", "${escapedName}", "—", "Approvazione al rilascio"),\n`;
+            source = source.slice(0, registerStart) + row + source.slice(registerStart);
+
+            const blob = await github.rest.git.createBlob({ owner, repo, content: source, encoding: 'utf-8' });
+            const tree = await github.rest.git.createTree({
+              owner, repo, base_tree: commit.data.tree.sha,
+              tree: [{ path: filePath, mode: fileEntry.mode, type: 'blob', sha: blob.data.sha }],
+            });
+
+            const beforeCommit = await github.rest.git.getRef({ owner, repo, ref: `heads/${branch}` });
+            if (beforeCommit.data.object.sha !== headSha) throw new Error('La PR è avanzata durante l’operazione; nessun aggiornamento è stato applicato.');
+            const releaseCommit = await github.rest.git.createCommit({
+              owner, repo,
+              message: `docs: approvazione rilascio ${filePath} v${nextVersion}\n\n${releaseMarker} head=${headSha}`,
+              tree: tree.data.sha,
+              parents: [headSha],
+            });
+
+            const latest = await github.rest.git.getRef({ owner, repo, ref: `heads/${branch}` });
+            if (latest.data.object.sha !== headSha) throw new Error('La PR è avanzata durante l’operazione; nessun aggiornamento è stato applicato.');
+            await github.rest.git.updateRef({ owner, repo, ref: `heads/${branch}`, sha: releaseCommit.data.sha, force: false });
+            core.info(`Aggiornato ${filePath}: ${oldVersion} → ${nextVersion}`);
