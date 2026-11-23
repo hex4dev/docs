@@ -52,14 +52,13 @@
 + Nome del gruppo
 + Revisione delle Norme di progetto
 + Sprint e ruoli
-+ Ripartizione delle attività
 
 = Resoconto
 == Approvazione del Responsabile e redazione dei verbali
-Il docente ha confermato che ogni pubblicazione richiede l'approvazione del Responsabile in carica. Il verbale esterno del 2026-11-13 è affidato a un non verificatore, perché il verificatore Matteo Angelini non era presente all'incontro e non potrebbe verificarlo.
+Il docente ha confermato che ogni pubblicazione richiede l'approvazione del Responsabile in carica. Il verbale esterno del 2026-11-13 è affidato a un non verificatore, perché il verificatore Matteo Angelini non era presente all'incontro e non potrebbe verificarlo; la verifica è svolta da Andrea Nogara.
 
 == Nome del gruppo
-Il nome dell'organizzazione GitHub non è modificabile e i PDF già firmati restano invariati: la discrepanza è accettata e i documenti già emessi non sono modificati.
+Il nome dell'organizzazione GitHub non è modificabile e i PDF già firmati restano invariati: la discrepanza tra «hex4dev» su GitHub e «Hex4dev» nei documenti è accettata e i documenti già emessi non sono modificati.
 
 == Revisione delle Norme di progetto
 È stata esaminata la bozza delle Norme di progetto, collocate con Glossario e diari di bordo nella cartella common, e concordate le regole su versionamento, branch, commit, issue e verifica (D3–D5). Manca la descrizione della struttura della repository.
