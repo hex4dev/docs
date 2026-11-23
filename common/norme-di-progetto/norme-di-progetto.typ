@@ -4,12 +4,13 @@
   titolo: "Norme di progetto",
   sottotitolo: "Documentazione interna",
   numero-gruppo: "14",
-  versione: "0.2",
+  versione: "0.3",
   data: "2026-11-16",
   uso: "Interno",
   redattori: ("Alessandro Zanier",),
   verificatori: ("Andrea Nogara",),
   registro: (
+    ("0.3", "2026-11-23", "Alessandro Zanier", "Andrea Nogara", "Chiarificazioni sul responsabile e sul processo di verifica"),
     ("0.2", "2026-11-20", "Alessandro Zanier", "Andrea Nogara", "Aggiunte le regole sulla struttura della repository, sui branch e sulla pianificazione degli sprint"),
     ("0.1", "2026-11-16", "Alessandro Zanier", "Andrea Nogara", "Prima stesura delle Norme di Progetto"),
   ),
@@ -97,8 +98,10 @@ aggiunti a questa sezione prima di avviare le attività corrispondenti.
    decisioni, attività assegnate e prossima riunione, quando definita. Ogni
    attività indica responsabile e scadenza; se deriva da una decisione, il
    verbale collega i due elementi tramite i rispettivi identificativi.
-9. Il *Responsabile* dello sprint redige il _diario di bordo_, che riassume
+9. Il *Responsabile* dello sprint e presenta il _diario di bordo_, che riassume
    attività completate, attività previste e difficoltà emerse.
+10. Il *Responsabile* può delegare la realizzazione del _diario di bordo_ ad un altro
+   componente del gruppo in caso di necessità.
 
 == Gestione della configurazione
 
@@ -140,14 +143,14 @@ aggiunti a questa sezione prima di avviare le attività corrispondenti.
 
 == Verifica
 
-1. Prima del merge, un *Verificatore* diverso dall'autore controlla la
+1. Prima del merge, un *Verificatore* diverso dall'autore della modifica controlla la
    `pull request`. Verifica la correttezza della modifica, la coerenza con le decisioni
    del gruppo e il completamento dell'attività assegnata.
 2. Se rileva problemi, il *Verificatore* li segnala nella `pull request` e l'autore
    li corregge prima di una nuova verifica.
 3. Per la prima pubblicazione di un documento, il *Responsabile* dello sprint ne
-   approva il rilascio dopo la verifica. Il Responsabile non approva modifiche
-   proprie.
+   approva il rilascio dopo la verifica.
+4. Il *Verificatore* di un verbale relativo alla riunione deve aver partecipato alla stessa.
 
 == Qualità e validazione
 
