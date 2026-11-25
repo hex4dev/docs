@@ -52,6 +52,7 @@
   versione: "0.1",
   data: datetime.today().display("[day]/[month]/[year]"),
   uso: "Esterno",
+  approvazione: (),
   redattori: (),
   verificatori: (),
   registro: (),
@@ -108,6 +109,11 @@
         text(weight: "semibold", fill: colore-scuro)[Uso], [#uso],
         text(weight: "semibold", fill: colore-scuro)[Redattori], elenco(redattori),
         text(weight: "semibold", fill: colore-scuro)[Verificatori], elenco(verificatori),
+        ..(if approvazione != none and approvazione.len() > 0 and approvazione != ("",) {
+          (text(weight: "semibold", fill: colore-scuro)[Approvazione], elenco(approvazione))
+        } else {
+          ()
+        })
       )
     ]
   ]
