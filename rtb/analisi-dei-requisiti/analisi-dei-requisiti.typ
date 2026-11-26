@@ -16,12 +16,13 @@
   sottotitolo: "Capitolato C9 – SpecCheck · Zucchetti S.p.A.",
   gruppo: "Hex4dev",
   numero-gruppo: "14",
-  versione: "0.1",
-  data: "2026-11-15",
+  versione: "0.2",
+  data: "2026-11-24",
   uso: "Esterno",
-  redattori: ("Francesco Bassani",),
+  redattori: ("Francesco Bassani", "Alessandro Ravenna"),
   verificatori: (),
   registro: (
+    ("0.2", "2026-11-24", "Alessandro Ravenna", "—", "Aggiornamento della Sezione 6 con gli esiti del primo incontro con la proponente (VE-2026-11-13)"),
     ("0.1", "2026-11-15", "Francesco Bassani", "—", "Prima bozza: descrizione del prodotto, casi d'uso, requisiti e tracciamento ricavati dal capitolato"),
   ),
 )
@@ -346,7 +347,7 @@
 == Scopo del documento
 Questo documento descrive che cosa deve fare SpecCheck, il prodotto richiesto dal capitolato C9 di Zucchetti S.p.A.: chi lo usa, in quali situazioni (casi d'uso) e quali requisiti deve soddisfare. È il riferimento per la progettazione, per i test di sistema e di accettazione del _Piano di Qualifica_ e per il confronto con la proponente sul perimetro del prodotto.
 
-La versione corrente è una *prima bozza*, ricavata dal solo capitolato e dalla sua presentazione, prima dell'incontro con la proponente. I punti che il capitolato lascia aperti sono raccolti nella @questioni: le risposte di Zucchetti saranno integrate nelle versioni successive. I requisiti con fonte «INT» sono proposte del gruppo e vanno confermati nello stesso incontro.
+Il documento è ricavato dal capitolato, dalla sua presentazione e dal primo incontro con la proponente. I punti che il capitolato lasciava aperti e gli esiti dell'incontro sono raccolti nella @questioni. I requisiti con fonte «INT» sono proposte del gruppo e restano da confermare con la proponente.
 
 == Scopo del prodotto
 I modelli di linguaggio (LLM) producono codice a grande velocità, ma nessuno strumento oggi dice se quel codice realizza davvero ciò che era stato richiesto: il collo di bottiglia si è spostato dalla scrittura alla verifica. SpecCheck è un insieme di estensioni di OpenCode che, nel contesto di un progetto software, verifica la tracciabilità lungo la catena *casi d'uso → specifiche dei requisiti → codice sorgente*, e riporta in una dashboard lo stato della realizzazione e le discrepanze trovate. Il prodotto verifica; la realizzazione resta ai programmatori.
@@ -359,6 +360,7 @@ I termini tecnici e di dominio saranno definiti nel _Glossario_, documento separ
 - Capitolato d'appalto C9 – _SpecCheck: sviluppo di skill per OpenCode per la verifica della tracciabilità end-to-end da casi d'uso a requisiti e codice sorgente_, Zucchetti S.p.A., a.a. 2026/2027.
 - _Dichiarazione degli impegni_, Hex4dev, versione 2.0 del 2026-11-09.
 - Verbale interno VI-2026-11-11, Hex4dev (decisione D5: avvio dell'analisi dei requisiti da una bozza interna).
+- Verbale esterno VE-2026-11-13, Hex4dev, primo incontro di chiarimento con Zucchetti S.p.A. del 2026-11-13.
 
 === Riferimenti informativi
 - Presentazione del capitolato C9, Zucchetti S.p.A., 2026.
@@ -764,7 +766,7 @@ Ogni caso d'uso ha un codice `UC[n]`; i sottocasi hanno la forma `UC[n].[m]`. I 
 )
 
 // ============================================================
-= Requisiti
+= Requisiti <requisiti-sez>
 
 == Classificazione
 Ogni requisito ha un codice `R[T]-[nn]`, in cui `T` indica il tipo: *F* funzionale, *Q* di qualità, *V* di vincolo. I codici non vengono riassegnati: un requisito eliminato lascia il proprio numero inutilizzato.
@@ -845,23 +847,35 @@ UC3 non compare perché i suoi requisiti sono attribuiti ai sottocasi UC3.1 e UC
 ]
 
 // ============================================================
-= Questioni aperte <questioni>
+= Primo incontro con la proponente <questioni>
 
-I punti seguenti non trovano risposta nel capitolato e incidono sui requisiti. Saranno sottoposti a Zucchetti nel primo incontro; le risposte saranno registrate nel verbale esterno e riportate in questo documento.
+Il 2026-11-13 il gruppo ha incontrato Zucchetti in videoconferenza (Zoom), nel primo incontro di chiarimento sul capitolato; per la proponente era presente Gregorio Piccoli. L'incontro è documentato nel verbale esterno VE-2026-11-13, a cui si rimanda per il resoconto completo. Questa sezione riporta ciò che dall'incontro è emerso sulle questioni che il capitolato lasciava aperte, insieme alle indicazioni nuove.
 
-#figura-tab([Questioni da sottoporre alla proponente])[
-  #tab((center, left, left), (1.1cm, 1fr, 3.6cm), ("N.", "Questione", "Requisiti interessati"), (
-    [Q1], [*Formato dei diagrammi.* Quale formato è atteso per l'MVP tra Mermaid e XMI? Il capitolato cita anche PlantUML e UMLet: sono formati accettabili? Va inoltre verificato come rappresentare in Mermaid un diagramma dei casi d'uso.], [RF-06, RF-07, RF-08],
-    [Q2], [*Struttura dei documenti.* La documentazione dei casi d'uso e le specifiche dei requisiti seguono un modello fisso (sezioni, identificativi), oppure il sistema deve leggere testo libero?], [RF-10, RF-11, RF-13, RF-14],
-    [Q3], [*Codice da verificare.* Quali linguaggi di programmazione e quali dimensioni di progetto deve gestire l'MVP?], [RF-21, RF-22],
-    [Q4], [*Esiti e accettazione.* Quali esiti sono attesi per una specifica (ad esempio «parzialmente implementata»)? Con quali criteri la proponente valuterà la qualità delle verifiche (falsi positivi e negativi)?], [RF-19, RF-23],
-    [Q5], [*Componente deterministica.* C'è una preferenza tra plugin e applicativo esterno, e sul linguaggio con cui realizzarli?], [RV-02, RV-03],
-    [Q6], [*Configurazione e comandi.* È accettabile che lo sviluppatore indichi la posizione delle fonti e avvii le verifiche con comandi espliciti, o è attesa un'attivazione automatica tramite skill?], [RF-05, RF-25, RF-26],
-    [Q7], [*Modelli.* Quali modelli saranno messi a disposizione, con quale modalità di accesso e con quale limite di costo? Il prodotto deve funzionare anche con i soli modelli piccoli?], [RQ-08],
-    [Q8], [*Ambiente.* Qual è la versione di riferimento di OpenCode e su quali sistemi operativi deve funzionare l'installazione?], [RF-01, RF-02, RF-03],
-    [Q9], [*Test.* Che cosa si intende per «adeguata copertura» e come vanno trattati nei test i risultati non deterministici degli LLM?], [RQ-01, RQ-02],
-    [Q10], [*Prestazioni.* Ci sono attese su tempi e costi di una verifica?], [—],
-    [Q11], [*Progetto di riferimento.* La proponente suggerisce un progetto pubblico su cui provare le verifiche, o ne mette a disposizione uno?], [RV-06],
-    [Q12], [*Pubblicazione.* Ci sono indicazioni sulla licenza open source da adottare?], [RQ-07],
+== Esito delle questioni poste
+#show figure.where(kind: table): set block(breakable: true)
+La @tab-questioni riporta le questioni sottoposte alla proponente su cui l'incontro ha dato indicazioni. L'esito è «Risolta» se la risposta è sufficiente a fissare il requisito, «Parziale» se le indicazioni ricevute non bastano a chiuderla. La numerazione è quella con cui le questioni sono state poste alla proponente: quelle su cui l'incontro non ha dato indicazioni non sono riportate.
+
+#figura-tab([Esito delle questioni sottoposte alla proponente])[
+  #tab((center, left, left, left), (1.1cm, 1fr, 1.5fr, 3.1cm), ("N.", "Questione", "Esito dell'incontro", "Requisiti interessati"), (
+    [Q1], [*Formato dei diagrammi.* Quale formato è atteso per l'MVP tra Mermaid e XMI? Il capitolato cita anche PlantUML e UMLet: sono formati accettabili? Va inoltre verificato come rappresentare in Mermaid un diagramma dei casi d'uso.], [_Parziale._ Il formato per l'MVP non è stato stabilito. La proponente vorrebbe che proposte e specifiche contengano i casi d'uso, possibilmente con un diagramma in PlantUML, PNG o ASCII art. Mermaid e XMI non sono stati commentati.], [RF-06, RF-07, RF-08],
+    [Q2], [*Struttura dei documenti.* La documentazione dei casi d'uso e le specifiche dei requisiti seguono un modello fisso (sezioni, identificativi), oppure il sistema deve leggere testo libero?], [_Parziale._ Non è stato indicato un modello fisso. La proponente propone di raccogliere i casi d'uso in un documento e di richiamarli nelle proposte, così da verificare quali sono già coperti da una specifica; il flusso di riferimento è quello di OpenSpec.], [RF-10, RF-11, RF-13, RF-14],
+    [Q4], [*Esiti e accettazione.* Quali esiti sono attesi per una specifica (ad esempio «parzialmente implementata»)? Con quali criteri la proponente valuterà la qualità delle verifiche (falsi positivi e negativi)?], [_Parziale._ Esiti e criteri di valutazione non sono stati definiti. La proponente ha chiarito che la ripartizione delle verifiche tra LLM e sistema deterministico non è stabilita a priori: è una domanda di ricerca e la risposta è attesa come risultato del progetto. Ha indicato come punto di partenza più promettente il tracciamento di come un caso d'uso si ritrova all'interno di un requisito.], [RF-19, RF-23],
+    [Q5], [*Componente deterministica.* C'è una preferenza tra plugin e applicativo esterno, e sul linguaggio con cui realizzarli?], [_Parziale._ Il gruppo può scegliere liberamente linguaggi e tecnologie (ad esempio Python, TypeScript, JavaScript, Java, C\#, C++), privilegiando quelli che conosce meglio, così che la tecnologia non sia un ostacolo. Non è stata espressa una preferenza tra plugin e applicativo esterno.], [RV-02, RV-03],
+    [Q6], [*Configurazione e comandi.* È accettabile che lo sviluppatore indichi la posizione delle fonti e avvii le verifiche con comandi espliciti, o è attesa un'attivazione automatica tramite skill?], [_Parziale._ Non è stata affrontata in modo diretto. La dimostrazione ha mostrato un flusso a comandi espliciti (`opsx propose`, `opsx apply`); la proponente ha inoltre suggerito una skill che controlli che gli interventi sul codice, ad esempio i commit su Git, tocchino le parti previste.], [RF-05, RF-25, RF-26],
+    [Q7], [*Modelli.* Quali modelli saranno messi a disposizione, con quale modalità di accesso e con quale limite di costo? Il prodotto deve funzionare anche con i soli modelli piccoli?], [_Parziale._ La proponente consiglia OpenCode, che include già modelli gratuiti di buona qualità, il cui uso non crea problemi perché il codice non contiene segreti industriali. Su richiesta fornisce una chiave d'accesso, con limiti di utilizzo, ai modelli open source (ad esempio Qwen e Gemma) eseguiti sulle proprie GPU. La compatibilità con altri harness non è richiesta. Non è stato chiarito se il prodotto debba funzionare con i soli modelli piccoli.], [RQ-08],
+    [Q11], [*Progetto di riferimento.* La proponente suggerisce un progetto pubblico su cui provare le verifiche, o ne mette a disposizione uno?], [_Risolta._ La proponente non fornisce un progetto di prova. Il gruppo può usare un qualsiasi progetto ben documentato, anche proprio e sviluppato per altri corsi, purché abbia casi d'uso, diagrammi UML e specifiche un minimo formali. In alternativa può fornire un progetto didattico dell'Università di Pisa, completo di casi d'uso.], [RV-06],
   ))
-]
+] <tab-questioni>
+
+== Indicazioni emerse
+L'incontro ha dato anche indicazioni ulteriori rispetto a quanto previsto dal capitolato:
+
+- *Tappe e incontri.* Il progetto procede con la presentazione dei requisiti raccolti (documenti e casi d'uso, senza sviluppo), poi con il PoC e infine con l'MVP. Prima di ogni revisione con i docenti il gruppo deve confrontarsi con la proponente per verificare che il lavoro corrisponda alle attese; negli altri casi gli incontri si fissano quando servono, partendo da un contatto via mail, e le piattaforme (Zoom, Google Meet o altre) sono a scelta del gruppo.
+- *Ruolo dell'LLM.* Secondo la proponente l'LLM è molto interessante, ma richiede una forte verifica formale: non è deterministico e, davanti a una specifica ambigua, tende a scioglierla con interpretazioni proprie. Questo conferma la scelta di affidare le parti che richiedono precisione e ripetibilità a una componente deterministica (RV-03).
+- *Limiti del flusso OpenSpec.* La dimostrazione, svolta con OpenCode, OpenSpec e un modello GLM in esecuzione sui server aziendali, ha mostrato le fasi di proposta, applicazione e archiviazione di una modifica. Il limite indicato è l'assenza di casi d'uso e di formalismo: proposta e design sono in linguaggio naturale e quindi non verificabili, e il risultato è controllato dai test ma non da una verifica formale che confermi la modifica delle parti di codice previste.
+- *Casi d'uso nel flusso di specifica.* La proponente vorrebbe che proposte e specifiche includano i casi d'uso, in modo che ogni requisito entri in un percorso tracciabile.
+
+== Questioni ancora aperte e prossimi passi
+Restano da chiarire le questioni risolte solo in parte, in particolare il formato dei diagrammi e il comportamento atteso con i modelli di piccole dimensioni, e gli argomenti che l'incontro non ha toccato: linguaggi e dimensioni dei progetti da verificare, ambiente di installazione, test, prestazioni e licenza. Le indicazioni sulla ripartizione delle verifiche e sull'integrazione dei casi d'uso nel flusso di OpenSpec, oltre alla skill per il controllo dei commit, saranno valutate dal gruppo come possibili nuovi requisiti; fino ad allora non modificano i requisiti della @requisiti-sez.
+
+Il gruppo svolgerà alcune prove con OpenCode e OpenSpec su esempi propri, cercando di integrare i casi d'uso nel flusso. Successivamente fisserà un nuovo incontro con la proponente per sottoporre domande più precise, a partire dalle questioni elencate sopra.
