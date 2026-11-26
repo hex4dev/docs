@@ -15,6 +15,7 @@
 //      luogo: "Online (Zoom)",
 //      oggetto: "Incontro esplorativo"
 //      verbalizzante: "Nome Cognome",
+//      approvazione: "Nome Cognome",
 //      presenti-interni: ("Nome Cognome",),
 //      assenti-interni: ("Nome Cognome",),
 //      presenti-esterni: ("Nome Cognome",),
@@ -111,6 +112,7 @@
   luogo: "Online",
   oggetto: none,
   verbalizzante: none,
+  approvazione: none,
   presenti-interni: (),
   assenti-interni: (),
   presenti-esterni: (),
@@ -192,6 +194,7 @@
      else { () },
     ..if azienda != none { riga("Azienda", azienda) } else { () },
     ..if verbalizzante != none { riga("Verbalizzante", verbalizzante) } else { () },
+    ..riga("Approvazione a rilascio", if approvazione != none { approvazione } else [—]),
     ..riga("Presenti interni", elenco(presenti-interni)),
     ..riga("Assenti interni", elenco(assenti-interni)),
     ..riga("Presenti esterni", elenco(presenti-esterni)),
@@ -200,7 +203,7 @@
   block(width: 100%, fill: colore-sfondo, inset: 14pt, radius: 4pt,
         stroke: (left: 3pt + colore-accento))[
     #set par(justify: false)
-    #grid(columns: (3.2cm, 1fr), row-gutter: 0.7em, ..righe)
+    #grid(columns: (4.5cm, 1fr), row-gutter: 0.7em, ..righe)
   ]
 
   body
