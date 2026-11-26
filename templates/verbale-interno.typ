@@ -13,6 +13,7 @@
 //      ora-fine: "16:30",
 //      luogo: "Online (Discord)",
 //      verbalizzante: "Nome Cognome",
+//      approvazione: "Nome Cognome",
 //      presenti: ("Nome Cognome", "Nome Cognome"),
 //      assenti: ("Nome Cognome (giustificato)",),
 //    )
@@ -110,6 +111,7 @@
   ora-fine: none,
   luogo: "Online",
   verbalizzante: none,
+  approvazione: none,
   presenti: (),
   assenti: (),
   logo: "/assets/hex4dev_logo.png",
@@ -186,6 +188,7 @@
     ..if orario != none { riga("Orario", orario) } else { () },
     ..riga("Luogo", luogo),
     ..if verbalizzante != none { riga("Verbalizzante", verbalizzante) } else { () },
+    ..riga("Approvazione a rilascio", if approvazione != none { approvazione } else [—]),
     ..riga("Presenti", elenco(presenti)),
     ..riga("Assenti", elenco(assenti)),
   )
@@ -193,7 +196,7 @@
   block(width: 100%, fill: colore-sfondo, inset: 14pt, radius: 4pt,
         stroke: (left: 3pt + colore-accento))[
     #set par(justify: false)
-    #grid(columns: (3cm, 1fr), row-gutter: 0.7em, ..righe)
+    #grid(columns: (4.5cm, 1fr), row-gutter: 0.7em, ..righe)
   ]
 
   body
