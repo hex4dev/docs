@@ -1,0 +1,47 @@
+name: Aggiungi approvazione ai verbali
+
+on:
+  pull_request_review:
+    types: [submitted]
+
+permissions:
+  contents: write
+
+jobs:
+  approvazione:
+    if: >
+      github.event.review.state == 'approved' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    env:
+      BASE_REF: ${{ github.event.pull_request.base.ref }}
+      APPROVATORE: ${{ github.event.review.user.login }}
+    steps:
+      - name: Checkout del branch della PR
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Trova i verbali modificati nella PR
+        run: |
+          git fetch origin "$BASE_REF"
+          git diff --name-only --diff-filter=AM "origin/$BASE_REF...HEAD" \
+            | grep -E '^rtb/verbali/.*\.typ$' > changed.txt || true
+          echo "Verbali trovati:"
+          cat changed.txt
+
+      - name: Aggiungi la riga di approvazione
+        run: python3 scripts/aggiungi_approvatore.py "$APPROVATORE"
+
+      - name: Commit e push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          xargs -r git add < changed.txt
+          if git diff --cached --quiet; then
+            echo "Nessuna modifica da committare."
+          else
+            git commit -m "docs(verbali): aggiunta approvazione a rilascio"
+            git push
+          fi
