@@ -9,7 +9,6 @@
   versione: "0.1",
   data: "2026-11-23",
   uso: "Esterno",
-  approvazione: ("", ),
   redattori: ("Matilde Pedrocchi",),
   verificatori: ("Alessandro Zanier",),
   registro: (
@@ -112,7 +111,7 @@ Tutto ciò viene fatto allo scopo di tenere traccia delle attività svolte, dell
 Il prodotto da realizzare, denominato SpecCheck, è un pacchetto di skill, comandi, tool e almeno un plugin per OpenCode, distribuito come prodotto unico con script di installazione. Verifica la tracciabilità tra casi d'uso, requisiti e codice sorgente di un progetto software esterno, e riporta i risultati in una dashboard.
 
 == Glossario
-Per evitare ambiguità, tutti i termini tecnici e acronimi sono definiti nel documento _Glossario_. Talvolta un termine presente nel Glossario viene nominato in questo documento, verrà opportunamente segnalato nel seguente modo: termine#super[G]. 
+Per evitare ambiguità, tutti i termini tecnici e acronimi sono definiti nel _Glossario_. I termini presenti in quest'ultimo saranno segnalati con la seguente forma: termine#super[G]. 
 
 == Riferimenti
 === Normativi
